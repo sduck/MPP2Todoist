@@ -46,5 +46,17 @@ namespace MPP2Todoist.UI.Properties {
                 this["TodoistEmail"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TodoistPassword {
+            get {
+                return ((string)(this["TodoistPassword"]));
+            }
+            set {
+                this["TodoistPassword"] = value;
+            }
+        }
     }
 }

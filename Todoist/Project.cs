@@ -7,10 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
-{
-    using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
+using Todoist.NET;
 
+namespace MPP2Todoist.Todoist
+{
     /// <summary>
     /// The project.
     /// </summary>
@@ -19,54 +20,49 @@ namespace Todoist.NET
         #region Constants and Fields
 
         /// <summary>
-        /// The cache count.
-        /// </summary>
-        private readonly int cacheCount;
-
-        /// <summary>
         /// The color.
         /// </summary>
-        private readonly Color color;
+        private readonly Color _color;
 
         /// <summary>
         /// The id.
         /// </summary>
-        private readonly int id;
+        private readonly int _id;
 
         /// <summary>
         /// The indent.
         /// </summary>
-        private readonly int indent;
+        private readonly int _indent;
 
         /// <summary>
         /// The is group.
         /// </summary>
-        private readonly bool isGroup;
+        private readonly bool _isGroup;
 
         /// <summary>
         /// The is sub projects collapsed.
         /// </summary>
-        private readonly int isSubProjectsCollapsed;
+        private readonly int _isSubProjectsCollapsed;
 
         /// <summary>
         /// The item order.
         /// </summary>
-        private readonly int itemOrder;
+        private readonly int _itemOrder;
 
         /// <summary>
         /// The json data.
         /// </summary>
-        private readonly string jsonData;
+        private readonly string _jsonData;
 
         /// <summary>
         /// The name.
         /// </summary>
-        private readonly string name;
+        private readonly string _name;
 
         /// <summary>
         /// The owner id.
         /// </summary>
-        private readonly int ownerId;
+        private readonly int _ownerId;
 
         #endregion
 
@@ -82,81 +78,69 @@ namespace Todoist.NET
         {
             JObject o = JObject.Parse(jsonData);
 
-            this.ownerId = (int)o.SelectToken("user_id");
-            this.name = (string)o.SelectToken("name");
-            if (this.name[0] == '*')
+            _ownerId = (int)o.SelectToken("user_id");
+            _name = (string)o.SelectToken("name");
+            if (_name[0] == '*')
             {
-                this.name = this.name.Remove(0, 1);
-                this.isGroup = true;
+                _name = _name.Remove(0, 1);
+                _isGroup = true;
             }
             else
             {
-                this.isGroup = false;
+                _isGroup = false;
             }
 
-            this.indent = (int)o.SelectToken("indent");
-            //this.cacheCount = (int)o.SelectToken("cache_count");
-            this.id = (int)o.SelectToken("id");
-            this.itemOrder = (int)o.SelectToken("item_order");
-            this.isSubProjectsCollapsed = (int)o.SelectToken("collapsed");
+            _indent = (int)o.SelectToken("indent");
+            _id = (int)o.SelectToken("id");
+            _itemOrder = (int)o.SelectToken("item_order");
+            _isSubProjectsCollapsed = (int)o.SelectToken("collapsed");
 
             switch ((string)o.SelectToken("color"))
             {
                 case "#bde876":
-                    this.color = new Color(TodoistColor.Green);
+                    _color = new Color(TodoistColor.Green);
                     break;
                 case "#ff8581":
-                    this.color = new Color(TodoistColor.Red);
+                    _color = new Color(TodoistColor.Red);
                     break;
                 case "#ffc472":
-                    this.color = new Color(TodoistColor.Orange);
+                    _color = new Color(TodoistColor.Orange);
                     break;
                 case "#faed75":
-                    this.color = new Color(TodoistColor.Yellow);
+                    _color = new Color(TodoistColor.Yellow);
                     break;
                 case "#a8c9e5":
-                    this.color = new Color(TodoistColor.Blue);
+                    _color = new Color(TodoistColor.Blue);
                     break;
                 case "#999999":
-                    this.color = new Color(TodoistColor.MediumGrey);
+                    _color = new Color(TodoistColor.MediumGrey);
                     break;
                 case "#e3a8e5":
-                    this.color = new Color(TodoistColor.Pink);
+                    _color = new Color(TodoistColor.Pink);
                     break;
                 case "#dddddd":
-                    this.color = new Color(TodoistColor.LightGrey);
+                    _color = new Color(TodoistColor.LightGrey);
                     break;
                 case "#fc603c":
-                    this.color = new Color(TodoistColor.Flame);
+                    _color = new Color(TodoistColor.Flame);
                     break;
                 case "#ffcc00":
-                    this.color = new Color(TodoistColor.Gold);
+                    _color = new Color(TodoistColor.Gold);
                     break;
                 case "#74e8d4":
-                    this.color = new Color(TodoistColor.LightOpal);
+                    _color = new Color(TodoistColor.LightOpal);
                     break;
                 case "#3cd6fc":
-                    this.color = new Color(TodoistColor.BrilliantCerulean);
+                    _color = new Color(TodoistColor.BrilliantCerulean);
                     break;
             }
 
-            this.jsonData = jsonData;
+            _jsonData = jsonData;
         }
 
         #endregion
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets the amount of tasks in the project.
-        /// </summary>
-        public int CacheCount
-        {
-            get
-            {
-                return this.cacheCount;
-            }
-        }
 
         /// <summary>
         /// Gets the color-label of the project.
@@ -165,7 +149,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.color;
+                return _color;
             }
         }
 
@@ -176,7 +160,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.id;
+                return _id;
             }
         }
 
@@ -187,7 +171,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.indent;
+                return _indent;
             }
         }
 
@@ -198,7 +182,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.isGroup;
+                return _isGroup;
             }
         }
 
@@ -209,7 +193,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.isSubProjectsCollapsed == 1;
+                return _isSubProjectsCollapsed == 1;
             }
         }
 
@@ -220,7 +204,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.itemOrder;
+                return _itemOrder;
             }
         }
 
@@ -231,7 +215,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.jsonData;
+                return _jsonData;
             }
         }
 
@@ -242,7 +226,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.name;
+                return _name;
             }
         }
 
@@ -253,7 +237,7 @@ namespace Todoist.NET
         {
             get
             {
-                return this.ownerId;
+                return _ownerId;
             }
         }
 

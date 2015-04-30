@@ -44,13 +44,8 @@
   <ItemGroup>
     <Compile Include="MppService.cs" />
     <Compile Include="MppServiceException.cs" />
+    <Compile Include="MppTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{baae1390-f328-4986-9a77-1ffcc697b597}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

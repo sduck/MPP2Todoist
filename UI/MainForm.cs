@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
+using MPP2Todoist.Core;
 using MPP2Todoist.MPP;
-using MPP2Todoist.Todoist;
 using Todoist.NET;
 
 namespace MPP2Todoist.UI
@@ -14,11 +14,15 @@ namespace MPP2Todoist.UI
         public MainForm()
         {
             InitializeComponent();
+
+            txtMppFile.Text = Properties.Settings.Default.MppFile;
+            txtEmail.Text = Properties.Settings.Default.TodoistEmail;
+            txtPassword.Text = Properties.Settings.Default.TodoistPassword.DecryptString().ToInsecureString();
         }
 
         private void btnLoadMpp_Click(object sender, EventArgs e)
         {
-            var tasks = MppService.LoadTasks(txtMppFile.Text);
+            var tasks = SyncService.Instance.GetMppTasks(txtMppFile.Text);
 
             txtCount.Text = tasks.Count.ToString();
 
@@ -77,8 +81,6 @@ namespace MPP2Todoist.UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtMppFile.Text = Properties.Settings.Default.MppFile;
-            txtEmail.Text = Properties.Settings.Default.TodoistEmail;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -89,17 +91,12 @@ namespace MPP2Todoist.UI
 
         private void btnTodoistLogin_Click(object sender, EventArgs e)
         {
-            var user = new User();
 
             try
             {
-                if (string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
-                {
-                    return;
-                }
-
-                user.LogOn(txtEmail.Text, txtPassword.Text);
+                SyncService.Instance.TodoistLogin(txtEmail.Text, txtPassword.Text);
                 Properties.Settings.Default.TodoistEmail = txtEmail.Text;
+                Properties.Settings.Default.TodoistPassword = txtPassword.Text.ToSecureString().EncryptString();
                 Properties.Settings.Default.Save();
             }
             catch (WebException webException)
@@ -113,7 +110,8 @@ namespace MPP2Todoist.UI
                 return;
             }
 
-            var projects = user.GetProjects;
+            var projects = SyncService.Instance.GetTodoistProjects();
+
             ddTodoistProjects.Items.Clear();
             foreach (var project in projects)
             {

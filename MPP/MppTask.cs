@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MPP2Todoist
+namespace MPP2Todoist.MPP
 {
     public class MppTask
     {

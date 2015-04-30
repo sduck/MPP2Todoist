@@ -7,7 +7,10 @@ namespace MPP2Todoist.MPP
 {
     public class MppService
     {
-        public static List<MppTask> LoadTasks(string mppFile)
+        private List<MppTask> _tasks;
+        private string _mppFileLoaded;
+
+        public void LoadTasks(string mppFile)
         {
             var tasks = new List<MppTask>();
 
@@ -29,7 +32,8 @@ namespace MPP2Todoist.MPP
                     });
                 }
 
-                return tasks;
+                _tasks = tasks;
+                _mppFileLoaded = mppFile;
             }
             catch (System.Exception ex)
             {
@@ -40,5 +44,15 @@ namespace MPP2Todoist.MPP
                 app.FileCloseEx();
             }
         }
+
+        public List<MppTask> GetTasks(string mppFile)
+        {
+            if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
+            {
+                LoadTasks(mppFile);
+            }
+
+            return _tasks;
+        } 
     }
 }

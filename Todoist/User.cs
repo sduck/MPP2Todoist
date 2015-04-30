@@ -26,12 +26,12 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// Info page.
         /// </summary>
-        InfoPage, 
+        InfoPage,
 
         /// <summary>
         /// Blank page.
         /// </summary>
-        Blank, 
+        Blank,
 
         /// <summary>
         /// Project of choice (NYI).
@@ -47,7 +47,7 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// 24-hour clock format, e.g. 13:00.
         /// </summary>
-        TwentyFourHourClock = 0, 
+        TwentyFourHourClock = 0,
 
         /// <summary>
         /// 12-hour clock format, e.g. 1 pm.
@@ -63,7 +63,7 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// DD-MM-YYY date format.
         /// </summary>
-        DdMmYyyy = 0, 
+        DdMmYyyy = 0,
 
         /// <summary>
         /// MM-DD-YYY date format.
@@ -79,7 +79,7 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// Oldest tasks/items.
         /// </summary>
-        OldestDatesFirst = 0, 
+        OldestDatesFirst = 0,
 
         /// <summary>
         /// Newest tasks/items.
@@ -95,17 +95,17 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// Remind by email.
         /// </summary>
-        Email, 
+        Email,
 
         /// <summary>
         /// Remind by mobile phone.
         /// </summary>
-        Mobile, 
+        Mobile,
 
         /// <summary>
         /// Remind by Notifo account.
         /// </summary>
-        Notifo, 
+        Notifo,
 
         /// <summary>
         /// No reminders.
@@ -121,7 +121,7 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// LogOnFailed returned when login fail (usually due to wrong password/email).
         /// </summary>
-        LogOnFailed, 
+        LogOnFailed,
 
         /// <summary>
         /// LogOnSucceeded when login succeeded.
@@ -139,82 +139,82 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// The api token.
         /// </summary>
-        private string apiToken;
+        private string _apiToken;
 
         /// <summary>
         /// The date format.
         /// </summary>
-        private DateFormat dateFormat;
+        private DateFormat _dateFormat;
 
         /// <summary>
         /// The default reminder.
         /// </summary>
-        private DefaultReminder defaultReminder;
+        private DefaultReminder _defaultReminder;
 
         /// <summary>
         /// The email.
         /// </summary>
-        private string email;
+        private string _email;
 
         /// <summary>
         /// The full name.
         /// </summary>
-        private string fullName;
+        private string _fullName;
 
         /// <summary>
         /// The id.
         /// </summary>
-        private int id;
+        private int _id;
 
         /// <summary>
         /// The json data.
         /// </summary>
-        private string jsonData;
+        private string _jsonData;
 
         /// <summary>
         /// The mobile host.
         /// </summary>
-        private string mobileHost;
+        private string _mobileHost;
 
         /// <summary>
         /// The mobile number.
         /// </summary>
-        private string mobileNumber;
+        private string _mobileNumber;
 
         /// <summary>
         /// The notifo account.
         /// </summary>
-        private string notifoAccount;
+        private string _notifoAccount;
 
         /// <summary>
         /// The premium until.
         /// </summary>
-        private string premiumUntil;
+        private string _premiumUntil;
 
         /// <summary>
         /// The sort order.
         /// </summary>
-        private SortOrder sortOrder;
+        private SortOrder _sortOrder;
 
         /// <summary>
         /// The start page.
         /// </summary>
-        private StartPage? startPage;
+        private StartPage? _startPage;
 
         /// <summary>
         /// The time format.
         /// </summary>
-        private TimeFormat timeFormat;
+        private TimeFormat _timeFormat;
 
         /// <summary>
         /// The time zone.
         /// </summary>
-        private string timeZone;
+        private string _timeZone;
 
         /// <summary>
         /// The time zone offset.
         /// </summary>
-        private TimeZoneOffset timeZoneOffset;
+        private TimeZoneOffset _timeZoneOffset;
 
         #endregion
 
@@ -225,7 +225,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public User()
         {
-            this.LogOff();
+            LogOff();
         }
 
         #endregion
@@ -237,10 +237,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string ApiToken
         {
-            get
-            {
-                return this.apiToken;
-            }
+            get { return _apiToken; }
         }
 
         /// <summary>
@@ -248,10 +245,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public DateFormat DateFormat
         {
-            get
-            {
-                return this.dateFormat;
-            }
+            get { return _dateFormat; }
         }
 
         /// <summary>
@@ -259,10 +253,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public DefaultReminder DefaultReminder
         {
-            get
-            {
-                return this.defaultReminder;
-            }
+            get { return _defaultReminder; }
         }
 
         /// <summary>
@@ -270,10 +261,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string Email
         {
-            get
-            {
-                return this.email;
-            }
+            get { return _email; }
         }
 
         /// <summary>
@@ -281,10 +269,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string FullName
         {
-            get
-            {
-                return this.fullName;
-            }
+            get { return _fullName; }
         }
 
         /// <summary>
@@ -294,9 +279,9 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                this.CheckLoginStatus();
+                CheckLoginStatus();
 
-                Uri uri = Core.ConstructUri("getProjects?", "token=" + this.ApiToken, false);
+                Uri uri = Core.ConstructUri("getProjects?", "token=" + ApiToken, false);
                 string jsonResponse = Core.GetJsonData(uri);
 
                 JArray o = JArray.Parse(jsonResponse);
@@ -309,10 +294,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
+            get { return _id; }
         }
 
         /// <summary>
@@ -320,10 +302,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string JsonData
         {
-            get
-            {
-                return this.jsonData;
-            }
+            get { return _jsonData; }
         }
 
         /// <summary>
@@ -331,10 +310,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string MobileHost
         {
-            get
-            {
-                return this.mobileHost;
-            }
+            get { return _mobileHost; }
         }
 
         /// <summary>
@@ -342,10 +318,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string MobileNumber
         {
-            get
-            {
-                return this.mobileNumber;
-            }
+            get { return _mobileNumber; }
         }
 
         /// <summary>
@@ -353,10 +326,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string NotifoAccount
         {
-            get
-            {
-                return this.notifoAccount;
-            }
+            get { return _notifoAccount; }
         }
 
         /// <summary>
@@ -364,10 +334,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string PremiumUntil
         {
-            get
-            {
-                return this.premiumUntil;
-            }
+            get { return _premiumUntil; }
         }
 
         /// <summary>
@@ -375,10 +342,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public SortOrder SortOrder
         {
-            get
-            {
-                return this.sortOrder;
-            }
+            get { return _sortOrder; }
         }
 
         /// <summary>
@@ -386,10 +350,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public StartPage? StartPage
         {
-            get
-            {
-                return this.startPage;
-            }
+            get { return _startPage; }
         }
 
         /// <summary>
@@ -397,10 +358,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public TimeFormat TimeFormat
         {
-            get
-            {
-                return this.timeFormat;
-            }
+            get { return _timeFormat; }
         }
 
         /// <summary>
@@ -408,10 +366,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string TimeZone
         {
-            get
-            {
-                return this.timeZone;
-            }
+            get { return _timeZone; }
         }
 
         /// <summary>
@@ -419,10 +374,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public TimeZoneOffset TimeZoneOffset
         {
-            get
-            {
-                return this.timeZoneOffset;
-            }
+            get { return _timeZoneOffset; }
         }
 
         #endregion
@@ -453,10 +405,10 @@ namespace MPP2Todoist.Todoist
                 "register?",
                 string.Format(
                     "email={0}&" + "full_name={1}&" + "password={2}&" + "timezone={3}",
-                    email, 
-                    fullName, 
-                    password, 
-                    timeZone), 
+                    email,
+                    fullName,
+                    password,
+                    timeZone),
                 true);
             string jsonResponse = Core.GetJsonData(uri);
 
@@ -501,7 +453,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void AddItemToProject(int projectId, string content, int priority, int indent, int? itemOrder)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             if (priority < 1 || priority > 4)
             {
@@ -514,15 +466,15 @@ namespace MPP2Todoist.Todoist
             }
 
             Uri uri = Core.ConstructUri(
-                "addItem?", 
+                "addItem?",
                 string.Format(
-                    "token={0}&project_id={1}&content={2}&priority={3}&indent={4}&item_order={5}", 
-                    this.ApiToken, 
-                    projectId, 
-                    content, 
-                    priority, 
-                    indent, 
-                    itemOrder), 
+                    "token={0}&project_id={1}&content={2}&priority={3}&indent={4}&item_order={5}",
+                    ApiToken,
+                    projectId,
+                    content,
+                    priority,
+                    indent,
+                    itemOrder),
                 false);
             string jsonResponse = Core.GetJsonData(uri);
 
@@ -548,10 +500,10 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void AddNoteToItem(int itemId, string content)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "addNote?", string.Format("token={0}&item_id={1}&content={2}", this.ApiToken, itemId, content), false);
+                "addNote?", string.Format("token={0}&item_id={1}&content={2}", ApiToken, itemId, content), false);
             Core.GetJsonData(uri);
         }
 
@@ -566,7 +518,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void CompleteItems(int[] itemIds, bool? sendToHistory)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -588,8 +540,8 @@ namespace MPP2Todoist.Todoist
 
             sb.Append("]");
             Uri uri = Core.ConstructUri(
-                "completeItems?", 
-                string.Format("token={0}&ids={1}&in_history={2}", this.ApiToken, sb, Convert.ToInt32(sendToHistory)), 
+                "completeItems?",
+                string.Format("token={0}&ids={1}&in_history={2}", ApiToken, sb, Convert.ToInt32(sendToHistory)),
                 false);
             Core.GetJsonData(uri);
         }
@@ -605,7 +557,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void CreateLabel(string labelName, LabelColor color)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (string.IsNullOrWhiteSpace(labelName))
@@ -615,8 +567,8 @@ namespace MPP2Todoist.Todoist
 
             Core.GetJsonData(
                 Core.ConstructUri(
-                    "addLabel?", 
-                    string.Format("token={0}&name={1}&color={2}", this.apiToken, labelName, color.GetHashCode()), 
+                    "addLabel?",
+                    string.Format("token={0}&name={1}&color={2}", _apiToken, labelName, color.GetHashCode()),
                     false));
         }
 
@@ -637,7 +589,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void CreateProject(string projectName, int indent, int order, Color color)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (indent < 1 || indent > 4)
@@ -657,14 +609,14 @@ namespace MPP2Todoist.Todoist
             }
 
             Uri uri = Core.ConstructUri(
-                "addProject?", 
+                "addProject?",
                 string.Format(
-                    "token={0}&name={1}&indent={2}&order={3}&color={4}", 
-                    this.ApiToken, 
-                    projectName, 
-                    indent, 
-                    order, 
-                    color.TodoistColor.GetHashCode()), 
+                    "token={0}&name={1}&indent={2}&order={3}&color={4}",
+                    ApiToken,
+                    projectName,
+                    indent,
+                    order,
+                    color.TodoistColor.GetHashCode()),
                 false);
             string jsonResponse = Core.GetJsonData(uri);
             if (jsonResponse == "\"ERROR_NAME_IS_EMPTY\"")
@@ -681,7 +633,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void DeleteItems(int[] itemIds)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -702,7 +654,7 @@ namespace MPP2Todoist.Todoist
             }
 
             sb.Append("]");
-            Uri uri = Core.ConstructUri("deleteItems?", string.Format("token={0}&ids={1}", this.ApiToken, sb), false);
+            Uri uri = Core.ConstructUri("deleteItems?", string.Format("token={0}&ids={1}", ApiToken, sb), false);
             Core.GetJsonData(uri);
         }
 
@@ -717,7 +669,7 @@ namespace MPP2Todoist.Todoist
         /// </exception>
         public void DeleteLabel(string name)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (string.IsNullOrWhiteSpace(name))
@@ -726,7 +678,7 @@ namespace MPP2Todoist.Todoist
             }
 
             Core.GetJsonData(
-                Core.ConstructUri("deleteLabel?", string.Format("token={0}&name={1}", this.apiToken, name), false));
+                Core.ConstructUri("deleteLabel?", string.Format("token={0}&name={1}", _apiToken, name), false));
         }
 
         /// <summary>
@@ -740,10 +692,10 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void DeleteNote(int itemId, int noteId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "deleteNote?", string.Format("token={0}&item_id={1}&note_id={2}", this.ApiToken, itemId, noteId), false);
+                "deleteNote?", string.Format("token={0}&item_id={1}&note_id={2}", ApiToken, itemId, noteId), false);
             Core.GetJsonData(uri);
         }
 
@@ -755,11 +707,11 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void DeleteProject(int projectId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Core.GetJsonData(
                 Core.ConstructUri(
-                    "deleteProject?", string.Format("token={0}&project_id={1}", this.ApiToken, projectId), false));
+                    "deleteProject?", string.Format("token={0}&project_id={1}", ApiToken, projectId), false));
         }
 
         /// <summary>
@@ -780,12 +732,12 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public ReadOnlyCollection<Item> GetAllCompletedItems(int? projectId, string label, string interval)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "getAllCompletedItems?", 
+                "getAllCompletedItems?",
                 string.Format(
-                    "token={0}&project_id={1}&label={2}&interval={3}", this.ApiToken, projectId, label, interval), 
+                    "token={0}&project_id={1}&label={2}&interval={3}", ApiToken, projectId, label, interval),
                 false);
             string jsonResponse = Core.GetJsonData(uri);
 
@@ -809,10 +761,10 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public ReadOnlyCollection<Item> GetCompletedItemsByProjectId(int projectId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "getCompletedItems?", string.Format("token={0}&project_id={1}", this.ApiToken, projectId), false);
+                "getCompletedItems?", string.Format("token={0}&project_id={1}", ApiToken, projectId), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             if (jsonResponse == "\"ERROR_PROJECT_NOT_FOUND\"")
@@ -835,7 +787,7 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public ReadOnlyCollection<Item> GetItemsById(int[] itemIds)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -856,7 +808,7 @@ namespace MPP2Todoist.Todoist
             }
 
             sb.Append("]");
-            Uri uri = Core.ConstructUri("getItemsById?", string.Format("token={0}&ids={1}", this.ApiToken, sb), false);
+            Uri uri = Core.ConstructUri("getItemsById?", string.Format("token={0}&ids={1}", ApiToken, sb), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             JArray o = JArray.Parse(jsonResponse);
@@ -871,9 +823,9 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public ReadOnlyCollection<Label> GetLabels()
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
-            Uri uri = Core.ConstructUri("getLabels?", string.Format("token={0}", this.apiToken), false);
+            Uri uri = Core.ConstructUri("getLabels?", string.Format("token={0}", _apiToken), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             JObject o = JObject.Parse(jsonResponse);
@@ -891,10 +843,10 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public ReadOnlyCollection<Note> GetNotesByItemId(int itemId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "getNotes?", string.Format("token={0}&item_id={1}", this.ApiToken, itemId), false);
+                "getNotes?", string.Format("token={0}&item_id={1}", ApiToken, itemId), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             JArray o = JArray.Parse(jsonResponse);
@@ -913,10 +865,10 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public Project GetProject(int projectId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "getProject?", string.Format("token={0}&project_id={1}", this.ApiToken, projectId), false);
+                "getProject?", string.Format("token={0}&project_id={1}", ApiToken, projectId), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             if (jsonResponse == "\"ERROR_PROJECT_NOT_FOUND\"")
@@ -938,10 +890,10 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public ReadOnlyCollection<Item> GetUncompletedItemsByProjectId(int projectId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "getUncompletedItems?", string.Format("token={0}&project_id={1}", this.ApiToken, projectId), false);
+                "getUncompletedItems?", string.Format("token={0}&project_id={1}", ApiToken, projectId), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             if (jsonResponse == "\"ERROR_PROJECT_NOT_FOUND\"")
@@ -958,22 +910,22 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public void LogOff()
         {
-            this.id = 0;
-            this.email = string.Empty;
-            this.fullName = string.Empty;
-            this.apiToken = string.Empty;
-            this.startPage = new StartPage();
-            this.timeZone = null;
-            this.timeZoneOffset = new TimeZoneOffset();
-            this.timeFormat = new TimeFormat();
-            this.dateFormat = 0;
-            this.sortOrder = SortOrder.OldestDatesFirst;
-            this.notifoAccount = string.Empty;
-            this.mobileNumber = string.Empty;
-            this.mobileHost = string.Empty;
-            this.premiumUntil = string.Empty;
-            this.defaultReminder = new DefaultReminder();
-            this.jsonData = string.Empty;
+            _id = 0;
+            _email = string.Empty;
+            _fullName = string.Empty;
+            _apiToken = string.Empty;
+            _startPage = new StartPage();
+            _timeZone = null;
+            _timeZoneOffset = new TimeZoneOffset();
+            _timeFormat = new TimeFormat();
+            _dateFormat = 0;
+            _sortOrder = SortOrder.OldestDatesFirst;
+            _notifoAccount = string.Empty;
+            _mobileNumber = string.Empty;
+            _mobileHost = string.Empty;
+            _premiumUntil = string.Empty;
+            _defaultReminder = new DefaultReminder();
+            _jsonData = string.Empty;
         }
 
         /// <summary>
@@ -998,7 +950,7 @@ namespace MPP2Todoist.Todoist
         /// </returns>
         public LogOnResult LogOn(string logOnEmail, string password)
         {
-            this.LogOff();
+            LogOff();
             if (string.IsNullOrWhiteSpace(logOnEmail))
             {
                 throw new ArgumentNullException(logOnEmail);
@@ -1009,7 +961,9 @@ namespace MPP2Todoist.Todoist
                 throw new ArgumentNullException(password);
             }
 
-            Uri uri = Core.ConstructUri("login?", string.Format("email={0}&password={1}", HttpUtility.UrlEncode(logOnEmail), HttpUtility.UrlEncode(password)), true);
+            Uri uri = Core.ConstructUri("login?",
+                string.Format("email={0}&password={1}", HttpUtility.UrlEncode(logOnEmail),
+                    HttpUtility.UrlEncode(password)), true);
             string tempJson = Core.GetJsonData(uri);
 
             if (tempJson == "\"LOGIN_ERROR\"")
@@ -1017,8 +971,8 @@ namespace MPP2Todoist.Todoist
                 throw new LogOnFailedException("LogOn failed.");
             }
 
-            this.jsonData = tempJson;
-            this.AnalyseJson();
+            _jsonData = tempJson;
+            AnalyseJson();
 
             return LogOnResult.LogOnSucceeded;
         }
@@ -1037,7 +991,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void MoveItems(int[] itemIds, int fromProjectId, int toProjectId)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -1045,7 +999,7 @@ namespace MPP2Todoist.Todoist
                 throw new ArgumentNullException("itemIds");
             }
 
-            ReadOnlyCollection<Item> items = this.GetItemsById(itemIds);
+            ReadOnlyCollection<Item> items = GetItemsById(itemIds);
             if (items.Any(item => item.ProjectId != fromProjectId))
             {
                 throw new ItemException(string.Format("The item does not exist in {0}.", fromProjectId));
@@ -1072,8 +1026,8 @@ namespace MPP2Todoist.Todoist
             jsonMapping.Append("]}");
 
             Uri uri = Core.ConstructUri(
-                "moveItems?", 
-                string.Format("token={0}&project_items={1}&to_project={2}", this.ApiToken, jsonMapping, toProjectId), 
+                "moveItems?",
+                string.Format("token={0}&project_items={1}&to_project={2}", ApiToken, jsonMapping, toProjectId),
                 false);
             Core.GetJsonData(uri);
         }
@@ -1086,7 +1040,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void UncompleteItems(int[] itemIds)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -1108,7 +1062,7 @@ namespace MPP2Todoist.Todoist
 
             sb.Append("]");
             Uri uri = Core.ConstructUri(
-                "uncompleteItems?", string.Format("token={0}&ids={1}", this.ApiToken, sb), false);
+                "uncompleteItems?", string.Format("token={0}&ids={1}", ApiToken, sb), false);
             Core.GetJsonData(uri);
         }
 
@@ -1132,18 +1086,18 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void UpdateItem(int itemId, string content, int? priority, int? indent, bool? isCollapsed)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "updateItem?", 
+                "updateItem?",
                 string.Format(
-                    "token={0}&id={1}&content={2}&priority={3}&indent={4}&collapsed={5}", 
-                    this.ApiToken, 
-                    itemId, 
-                    content, 
-                    priority, 
-                    indent, 
-                    Convert.ToInt32(isCollapsed)), 
+                    "token={0}&id={1}&content={2}&priority={3}&indent={4}&collapsed={5}",
+                    ApiToken,
+                    itemId,
+                    content,
+                    priority,
+                    indent,
+                    Convert.ToInt32(isCollapsed)),
                 false);
             string jsonResponse = Core.GetJsonData(uri);
 
@@ -1164,7 +1118,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void UpdateItemOrdering(int projectId, int[] itemIds)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -1186,7 +1140,7 @@ namespace MPP2Todoist.Todoist
 
             sb.Append("]");
             Uri uri = Core.ConstructUri(
-                "getItemsById?", string.Format("token={0}&project_id={1}&ids={2}", this.ApiToken, projectId, sb), false);
+                "getItemsById?", string.Format("token={0}&project_id={1}&ids={2}", ApiToken, projectId, sb), false);
             string jsonResponse = Core.GetJsonData(uri);
 
             if (jsonResponse == "\"ERROR_PROJECT_NOT_FOUND\"")
@@ -1206,7 +1160,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void UpdateLabelColor(string name, LabelColor color)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (string.IsNullOrWhiteSpace(name))
@@ -1216,8 +1170,8 @@ namespace MPP2Todoist.Todoist
 
             Core.GetJsonData(
                 Core.ConstructUri(
-                    "updateLabelColor?", 
-                    string.Format("token={0}&name={1}&color={2}", this.ApiToken, name, color.GetHashCode()), 
+                    "updateLabelColor?",
+                    string.Format("token={0}&name={1}&color={2}", ApiToken, name, color.GetHashCode()),
                     false));
         }
 
@@ -1232,7 +1186,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void UpdateLabelName(string oldName, string newName)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (string.IsNullOrWhiteSpace(oldName))
@@ -1247,8 +1201,8 @@ namespace MPP2Todoist.Todoist
 
             Core.GetJsonData(
                 Core.ConstructUri(
-                    "updateLabel?", 
-                    string.Format("token={0}&old_name={1}&new_name={2}", this.ApiToken, oldName, newName), 
+                    "updateLabel?",
+                    string.Format("token={0}&old_name={1}&new_name={2}", ApiToken, oldName, newName),
                     false));
         }
 
@@ -1277,26 +1231,26 @@ namespace MPP2Todoist.Todoist
         /// Toggle group.
         /// </param>
         public void UpdateProject(
-            int projectId, 
-            string name, 
-            TodoistColor? color, 
-            int? indent, 
-            int? itemOrder, 
-            bool? isCollapsed, 
+            int projectId,
+            string name,
+            TodoistColor? color,
+            int? indent,
+            int? itemOrder,
+            bool? isCollapsed,
             bool? isGroup)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             TodoistColor? internalColor = color;
             if (color == null)
             {
-                internalColor = this.GetProject(projectId).Color.TodoistColor;
+                internalColor = GetProject(projectId).Color.TodoistColor;
             }
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                Project projectToBeChanged = this.GetProject(projectId);
+                Project projectToBeChanged = GetProject(projectId);
                 name = projectToBeChanged.Name;
             }
 
@@ -1306,16 +1260,16 @@ namespace MPP2Todoist.Todoist
             }
 
             Uri uri = Core.ConstructUri(
-                "updateProject?", 
+                "updateProject?",
                 string.Format(
-                    "&project_id={0}&token={1}&name={2}&color={3}&indent={4}&order={5}&collapsed={6}", 
-                    projectId, 
-                    this.ApiToken, 
-                    name, 
-                    internalColor.GetHashCode(), 
-                    indent, 
-                    itemOrder, 
-                    Convert.ToInt32(isCollapsed)), 
+                    "&project_id={0}&token={1}&name={2}&color={3}&indent={4}&order={5}&collapsed={6}",
+                    projectId,
+                    ApiToken,
+                    name,
+                    internalColor.GetHashCode(),
+                    indent,
+                    itemOrder,
+                    Convert.ToInt32(isCollapsed)),
                 false);
             string jsonResponse = Core.GetJsonData(uri);
 
@@ -1336,7 +1290,7 @@ namespace MPP2Todoist.Todoist
         /// </example>
         public void UpdateProjectOrdering(int[] order)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (order == null)
@@ -1358,7 +1312,7 @@ namespace MPP2Todoist.Todoist
 
             sb.Append("]");
             Uri uri = Core.ConstructUri(
-                "updateProjectOrders?", string.Format("token={0}&item_id_list={1}", this.ApiToken, sb), false);
+                "updateProjectOrders?", string.Format("token={0}&item_id_list={1}", ApiToken, sb), false);
 
             string jsonResponse = Core.GetJsonData(uri);
             if (jsonResponse == "\"ERROR_PROJECT_NOT_FOUND\"")
@@ -1375,7 +1329,7 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public void UpdateRecurringDate(int[] itemIds)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             // Validation
             if (itemIds == null)
@@ -1397,7 +1351,7 @@ namespace MPP2Todoist.Todoist
 
             sb.Append("]");
             Uri uri = Core.ConstructUri(
-                "updateRecurringDate?", string.Format("token={0}&ids={1}", this.ApiToken, sb), false);
+                "updateRecurringDate?", string.Format("token={0}&ids={1}", ApiToken, sb), false);
             Core.GetJsonData(uri);
         }
 
@@ -1426,29 +1380,29 @@ namespace MPP2Todoist.Todoist
         /// New startpage
         /// </param>
         public void UpdateUser(
-            string newEmail, 
-            string newFullName, 
-            string newPassword, 
-            string newTimeZone, 
-            DateFormat? newDateFormat, 
-            TimeFormat? newTimeFormat, 
+            string newEmail,
+            string newFullName,
+            string newPassword,
+            string newTimeZone,
+            DateFormat? newDateFormat,
+            TimeFormat? newTimeFormat,
             StartPage? newStartPage)
         {
-            this.CheckLoginStatus();
+            CheckLoginStatus();
 
             Uri uri = Core.ConstructUri(
-                "updateUser?", 
+                "updateUser?",
                 string.Format(
                     "token={0}&" + "email={1}&" + "full_name={2}&" + "password={3}&" + "timezone={4}&"
-                    + "date_format={5}&" + "time_format={6}&" + "start_page={7}", 
-                    this.ApiToken, 
-                    newEmail, 
-                    newFullName, 
-                    newPassword, 
-                    newTimeZone, 
-                    newDateFormat, 
-                    newTimeFormat, 
-                    newStartPage), 
+                    + "date_format={5}&" + "time_format={6}&" + "start_page={7}",
+                    ApiToken,
+                    newEmail,
+                    newFullName,
+                    newPassword,
+                    newTimeZone,
+                    newDateFormat,
+                    newTimeFormat,
+                    newStartPage),
                 true);
 
             string jsonResponse = Core.GetJsonData(uri);
@@ -1463,8 +1417,8 @@ namespace MPP2Todoist.Todoist
                         "The e-mail address provided has already been registered with Todoist with another account.");
             }
 
-            this.jsonData = jsonResponse;
-            this.AnalyseJson();
+            _jsonData = jsonResponse;
+            AnalyseJson();
         }
 
         #endregion
@@ -1479,9 +1433,9 @@ namespace MPP2Todoist.Todoist
         /// </exception>
         internal void CheckLoginStatus()
         {
-            if (string.IsNullOrWhiteSpace(this.ApiToken))
+            if (string.IsNullOrWhiteSpace(ApiToken))
             {
-                throw new ArgumentNullException(this.ApiToken, "You must login to do that.");
+                throw new ArgumentNullException(ApiToken, "You must login to do that.");
             }
         }
 
@@ -1504,72 +1458,72 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         private void AnalyseJson()
         {
-            JObject o = JObject.Parse(this.JsonData);
-            this.notifoAccount = (string)o.SelectToken("notifo");
-            this.apiToken = (string)o.SelectToken("api_token");
-            switch ((int)o.SelectToken("time_format"))
+            JObject o = JObject.Parse(JsonData);
+            _notifoAccount = (string) o.SelectToken("notifo");
+            _apiToken = (string) o.SelectToken("api_token");
+            switch ((int) o.SelectToken("time_format"))
             {
                 case 0:
-                    this.timeFormat = TimeFormat.TwentyFourHourClock;
+                    _timeFormat = TimeFormat.TwentyFourHourClock;
                     break;
                 case 1:
-                    this.timeFormat = TimeFormat.TwelveHourClock;
+                    _timeFormat = TimeFormat.TwelveHourClock;
                     break;
             }
 
-            switch ((int)o.SelectToken("sort_order"))
+            switch ((int) o.SelectToken("sort_order"))
             {
                 case 0:
-                    this.sortOrder = SortOrder.OldestDatesFirst;
+                    _sortOrder = SortOrder.OldestDatesFirst;
                     break;
                 case 1:
-                    this.sortOrder = SortOrder.NewestDatesFirst;
+                    _sortOrder = SortOrder.NewestDatesFirst;
                     break;
             }
 
-            this.fullName = (string)o.SelectToken("full_name");
-            this.mobileNumber = (string)o.SelectToken("mobile_number");
-            this.mobileHost = (string)o.SelectToken("mobile_host");
-            this.timeZone = (string)o.SelectToken("timezone");
+            _fullName = (string) o.SelectToken("full_name");
+            _mobileNumber = (string) o.SelectToken("mobile_number");
+            _mobileHost = (string) o.SelectToken("mobile_host");
+            _timeZone = (string) o.SelectToken("timezone");
 
-            this.id = (int)o.SelectToken("id");
+            _id = (int) o.SelectToken("id");
 
-            switch ((int)o.SelectToken("date_format"))
+            switch ((int) o.SelectToken("date_format"))
             {
                 case 0:
-                    this.dateFormat = DateFormat.DdMmYyyy;
+                    _dateFormat = DateFormat.DdMmYyyy;
                     break;
                 case 1:
-                    this.dateFormat = DateFormat.MmDdYyyy;
+                    _dateFormat = DateFormat.MmDdYyyy;
                     break;
             }
 
-            this.premiumUntil = (string)o.SelectToken("premium_until");
+            _premiumUntil = (string) o.SelectToken("premium_until");
 
             JToken timeZoneString = o.SelectToken("tz_offset");
-            this.timeZoneOffset = new TimeZoneOffset(
-                timeZoneString.First.Value<string>(), 
-                timeZoneString.First.Next.Value<int>(), 
-                timeZoneString.First.Next.Next.Value<int>(), 
+            _timeZoneOffset = new TimeZoneOffset(
+                timeZoneString.First.Value<string>(),
+                timeZoneString.First.Next.Value<int>(),
+                timeZoneString.First.Next.Next.Value<int>(),
                 timeZoneString.First.Next.Next.Next.Value<bool>());
 
-            switch ((string)o.SelectToken("default_reminder"))
+            switch ((string) o.SelectToken("default_reminder"))
             {
                 case "email":
-                    this.defaultReminder = DefaultReminder.Email;
+                    _defaultReminder = DefaultReminder.Email;
                     break;
                 case "mobile":
-                    this.defaultReminder = DefaultReminder.Mobile;
+                    _defaultReminder = DefaultReminder.Mobile;
                     break;
                 case "notifo":
-                    this.defaultReminder = DefaultReminder.Notifo;
+                    _defaultReminder = DefaultReminder.Notifo;
                     break;
                 case "no_defalt":
-                    this.defaultReminder = DefaultReminder.NoDefault;
+                    _defaultReminder = DefaultReminder.NoDefault;
                     break;
             }
 
-            this.email = (string)o.SelectToken("email");
+            _email = (string) o.SelectToken("email");
         }
 
         #endregion
