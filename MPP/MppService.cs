@@ -7,12 +7,12 @@ namespace MPP2Todoist.MPP
 {
     public class MppService
     {
-        private List<MppTask> _tasks;
+        private List<TaskContainer> _tasks;
         private string _mppFileLoaded;
 
         public void LoadTasks(string mppFile)
         {
-            var tasks = new List<MppTask>();
+            var tasks = new List<TaskContainer>();
 
             var app = new Application();
             try
@@ -23,12 +23,12 @@ namespace MPP2Todoist.MPP
 
                 foreach (Task task in project.Tasks.Cast<Task>().ToList())
                 {
-                    tasks.Add(new MppTask
+                    tasks.Add(new TaskContainer
                     {
                         Id = task.ID,
                         IndentLevel = task.OutlineLevel,
                         Ansvarlig = task.ResourceNames,
-                        Name = String.Format("{0} - ansv.: {1}", task.Name, task.ResourceNames)
+                        Name = task.Name
                     });
                 }
 
@@ -45,7 +45,7 @@ namespace MPP2Todoist.MPP
             }
         }
 
-        public List<MppTask> GetTasks(string mppFile)
+        public List<TaskContainer> GetTasks(string mppFile)
         {
             if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
             {

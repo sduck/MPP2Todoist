@@ -36,16 +36,16 @@
             this.treeMppTasks = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.btnTodoistLogin = new System.Windows.Forms.Button();
-            this.treeTodoistTasks = new System.Windows.Forms.TreeView();
-            this.ddTodoistProjects = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnLoadTodoistTasks = new System.Windows.Forms.Button();
+            this.ddTodoistProjects = new System.Windows.Forms.ComboBox();
+            this.treeTodoistTasks = new System.Windows.Forms.TreeView();
+            this.btnTodoistLogin = new System.Windows.Forms.Button();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -150,6 +150,90 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Todoist";
             // 
+            // btnLoadTodoistTasks
+            // 
+            this.btnLoadTodoistTasks.Enabled = false;
+            this.btnLoadTodoistTasks.Location = new System.Drawing.Point(317, 77);
+            this.btnLoadTodoistTasks.Name = "btnLoadTodoistTasks";
+            this.btnLoadTodoistTasks.Size = new System.Drawing.Size(92, 23);
+            this.btnLoadTodoistTasks.TabIndex = 5;
+            this.btnLoadTodoistTasks.Text = "Load tasks";
+            this.btnLoadTodoistTasks.UseVisualStyleBackColor = true;
+            this.btnLoadTodoistTasks.Click += new System.EventHandler(this.btnLoadTodoistTasks_Click);
+            // 
+            // ddTodoistProjects
+            // 
+            this.ddTodoistProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddTodoistProjects.Enabled = false;
+            this.ddTodoistProjects.FormattingEnabled = true;
+            this.ddTodoistProjects.Location = new System.Drawing.Point(68, 79);
+            this.ddTodoistProjects.Name = "ddTodoistProjects";
+            this.ddTodoistProjects.Size = new System.Drawing.Size(227, 21);
+            this.ddTodoistProjects.TabIndex = 4;
+            // 
+            // treeTodoistTasks
+            // 
+            this.treeTodoistTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeTodoistTasks.Enabled = false;
+            this.treeTodoistTasks.Location = new System.Drawing.Point(6, 106);
+            this.treeTodoistTasks.Name = "treeTodoistTasks";
+            this.treeTodoistTasks.Size = new System.Drawing.Size(403, 379);
+            this.treeTodoistTasks.TabIndex = 3;
+            // 
+            // btnTodoistLogin
+            // 
+            this.btnTodoistLogin.Location = new System.Drawing.Point(204, 48);
+            this.btnTodoistLogin.Name = "btnTodoistLogin";
+            this.btnTodoistLogin.Size = new System.Drawing.Size(91, 23);
+            this.btnTodoistLogin.TabIndex = 2;
+            this.btnTodoistLogin.Text = "Login";
+            this.btnTodoistLogin.UseVisualStyleBackColor = true;
+            this.btnTodoistLogin.Click += new System.EventHandler(this.btnTodoistLogin_Click);
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(68, 22);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(130, 20);
+            this.txtEmail.TabIndex = 1;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(68, 50);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(130, 20);
+            this.txtPassword.TabIndex = 1;
+            this.txtPassword.UseSystemPasswordChar = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 82);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Project:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Password:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "E-mail:";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -169,89 +253,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(833, 497);
             this.splitContainer1.SplitterDistance = 408;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "E-mail:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Password:";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(68, 50);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(130, 20);
-            this.txtPassword.TabIndex = 1;
-            this.txtPassword.UseSystemPasswordChar = true;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(68, 22);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(130, 20);
-            this.txtEmail.TabIndex = 1;
-            // 
-            // btnTodoistLogin
-            // 
-            this.btnTodoistLogin.Location = new System.Drawing.Point(204, 48);
-            this.btnTodoistLogin.Name = "btnTodoistLogin";
-            this.btnTodoistLogin.Size = new System.Drawing.Size(91, 23);
-            this.btnTodoistLogin.TabIndex = 2;
-            this.btnTodoistLogin.Text = "Login";
-            this.btnTodoistLogin.UseVisualStyleBackColor = true;
-            this.btnTodoistLogin.Click += new System.EventHandler(this.btnTodoistLogin_Click);
-            // 
-            // treeTodoistTasks
-            // 
-            this.treeTodoistTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeTodoistTasks.Enabled = false;
-            this.treeTodoistTasks.Location = new System.Drawing.Point(6, 106);
-            this.treeTodoistTasks.Name = "treeTodoistTasks";
-            this.treeTodoistTasks.Size = new System.Drawing.Size(403, 379);
-            this.treeTodoistTasks.TabIndex = 3;
-            // 
-            // ddTodoistProjects
-            // 
-            this.ddTodoistProjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddTodoistProjects.Enabled = false;
-            this.ddTodoistProjects.FormattingEnabled = true;
-            this.ddTodoistProjects.Location = new System.Drawing.Point(68, 79);
-            this.ddTodoistProjects.Name = "ddTodoistProjects";
-            this.ddTodoistProjects.Size = new System.Drawing.Size(227, 21);
-            this.ddTodoistProjects.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 82);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Project:";
-            // 
-            // btnLoadTodoistTasks
-            // 
-            this.btnLoadTodoistTasks.Enabled = false;
-            this.btnLoadTodoistTasks.Location = new System.Drawing.Point(317, 77);
-            this.btnLoadTodoistTasks.Name = "btnLoadTodoistTasks";
-            this.btnLoadTodoistTasks.Size = new System.Drawing.Size(92, 23);
-            this.btnLoadTodoistTasks.TabIndex = 5;
-            this.btnLoadTodoistTasks.Text = "Load tasks";
-            this.btnLoadTodoistTasks.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

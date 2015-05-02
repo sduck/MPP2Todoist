@@ -2,17 +2,11 @@
 
 namespace MPP2Todoist.MPP
 {
-    public class MppTask
+    public class TaskContainer
     {
-        List<MppTask> _subtasks = new List<MppTask>();
-
         public int Id { get; set; }
         public string Name { get; set; }
         public short IndentLevel { get; set; }
         public string Ansvarlig { get; set; }
-        public List<MppTask> Subtasks
-        {
-            get { return _subtasks; }
-        }
     }
 }

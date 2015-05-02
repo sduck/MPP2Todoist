@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="MppService.cs" />
     <Compile Include="MppServiceException.cs" />
-    <Compile Include="MppTask.cs" />
+    <Compile Include="TaskContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using MPP2Todoist.Core;
+using MPP2Todoist.Core.DataObjects;
 using MPP2Todoist.MPP;
 using Todoist.NET;
 
@@ -26,11 +27,12 @@ namespace MPP2Todoist.UI
 
             txtCount.Text = tasks.Count.ToString();
 
-            RenderTree(tasks);
+            FillTreeView(treeMppTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
             treeMppTasks.Enabled = true;
+            treeMppTasks.ExpandAll();
         }
 
-        private void RenderTree(List<MppTask> tasks)
+        private void RenderTree(List<TaskContainer> tasks)
         {
             treeMppTasks.Nodes.Clear();
 
@@ -115,12 +117,42 @@ namespace MPP2Todoist.UI
             ddTodoistProjects.Items.Clear();
             foreach (var project in projects)
             {
-                ddTodoistProjects.Items.Add(string.Concat(Enumerable.Repeat("   ", project.Indent - 1)) + project.Name);
+                ddTodoistProjects.Items.Add(project);
             }
 
             ddTodoistProjects.Enabled = true;
             ddTodoistProjects.SelectedIndex = 0;
             btnLoadTodoistTasks.Enabled = true;
+        }
+
+        private void btnLoadTodoistTasks_Click(object sender, EventArgs e)
+        {
+            var selectedProject = ddTodoistProjects.SelectedItem as TodoistProject;
+            if (null != selectedProject)
+            {
+                var tasks = SyncService.Instance.GetTodoistTasks(selectedProject.Id);
+
+                FillTreeView(treeTodoistTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
+
+                treeTodoistTasks.Enabled = true;
+                treeTodoistTasks.ExpandAll();
+
+            }
+        }
+
+        private void FillTreeView<T>(TreeNodeCollection node, List<T> objectsToAdd) where T : ITreeObject<T>
+        {
+            foreach (var objectToAdd in objectsToAdd)
+            {
+                var newNode = new TreeNode(String.Format("{0}", objectToAdd));
+                newNode.Tag = objectToAdd;
+                node.Add(newNode);
+
+                if (objectToAdd.Children.Count > 0)
+                {
+                    FillTreeView(newNode.Nodes, objectToAdd.Children);
+                }
+            }
         }
     }
 }
