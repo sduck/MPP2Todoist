@@ -42,6 +42,9 @@ namespace MPP2Todoist.MPP
             finally
             {
                 app.FileCloseEx();
+                app.Quit();
+                app = null;
+                GC.Collect();
             }
         }
 
