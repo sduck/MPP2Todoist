@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -20,29 +21,59 @@ namespace MPP2Todoist.UI
             txtPassword.Text = Properties.Settings.Default.TodoistPassword.DecryptString().ToInsecureString();
         }
 
-        private void btnLoadMpp_Click(object sender, EventArgs e)
-        {
-            var statusValues = SyncService.Instance.GetMppStatusList(txtMppFile.Text);
-            var responsibles = SyncService.Instance.GetMppResponsibleList(txtMppFile.Text);
-
-            foreach (var statusValue in statusValues)
-            {
-                lstStatusFilter.Items.Add(statusValue);
-            }
-
-            foreach (var responsible in responsibles)
-            {
-                lstResponsibleFilter.Items.Add(responsible);
-            }
-
-            btnLoadMppTasks.Enabled = true;
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.MppFile = txtMppFile.Text;
             Properties.Settings.Default.Save();
         }
+
+        #region MPP related
+
+        private void btnLoadMpp_Click(object sender, EventArgs e)
+        {
+            var statusValues = SyncService.Instance.GetMppStatusList(txtMppFile.Text);
+            var responsibles = SyncService.Instance.GetMppResponsibleList(txtMppFile.Text);
+            var savedStatusFilter = Properties.Settings.Default.MppStatusFilter ?? new StringCollection();
+            var savedResponsibleFilter = Properties.Settings.Default.MppResponsibleFilter ?? new StringCollection();
+
+            foreach (var statusValue in statusValues)
+            {
+                lstStatusFilter.Items.Add(statusValue, savedStatusFilter.Contains(statusValue));
+            }
+
+            foreach (var responsible in responsibles)
+            {
+                lstResponsibleFilter.Items.Add(responsible, savedResponsibleFilter.Contains(responsible));
+            }
+
+            btnLoadMppTasks.Enabled = true;
+        }
+
+        private void btnLoadMppTasks_Click(object sender, EventArgs e)
+        {
+            var statusFilter = lstStatusFilter.CheckedItems.OfType<string>().ToList();
+            var responsibleFilter = lstResponsibleFilter.CheckedItems.OfType<string>().ToList();
+            var tasks = SyncService.Instance.GetMppTasks(txtMppFile.Text, statusFilter, responsibleFilter);
+
+            var statusStore = new StringCollection();
+            statusStore.AddRange(statusFilter.ToArray());
+            Properties.Settings.Default.MppStatusFilter = statusStore;
+            var responsibleStore = new StringCollection();
+            responsibleStore.AddRange(responsibleFilter.ToArray());
+            Properties.Settings.Default.MppResponsibleFilter = responsibleStore;
+            Properties.Settings.Default.Save();
+
+            txtCount.Text = tasks.Count.ToString();
+
+            treeMppTasks.Nodes.Clear();
+            FillTreeView(treeMppTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
+            treeMppTasks.Enabled = true;
+            treeMppTasks.ExpandAll();
+        }
+
+        #endregion
+
+        #region Todoist related
 
         private void btnTodoistLogin_Click(object sender, EventArgs e)
         {
@@ -85,6 +116,7 @@ namespace MPP2Todoist.UI
             {
                 var tasks = SyncService.Instance.GetTodoistTasks(selectedProject.Id);
 
+                treeTodoistTasks.Nodes.Clear();
                 FillTreeView(treeTodoistTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
 
                 treeTodoistTasks.Enabled = true;
@@ -92,6 +124,9 @@ namespace MPP2Todoist.UI
 
             }
         }
+
+
+        #endregion
 
         private void FillTreeView<T>(TreeNodeCollection node, List<T> objectsToAdd) where T : ITreeObject<T>
         {
@@ -106,17 +141,6 @@ namespace MPP2Todoist.UI
                     FillTreeView(newNode.Nodes, objectToAdd.Children);
                 }
             }
-        }
-
-        private void btnLoadMppTasks_Click(object sender, EventArgs e)
-        {
-            var tasks = SyncService.Instance.GetMppTasks(txtMppFile.Text);
-
-            txtCount.Text = tasks.Count.ToString();
-
-            FillTreeView(treeMppTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
-            treeMppTasks.Enabled = true;
-            treeMppTasks.ExpandAll();
         }
     }
 }

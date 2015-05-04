@@ -25,9 +25,19 @@ namespace MPP2Todoist.Core
 
         #region MPP related
 
-        public List<MppTask> GetMppTasks(string mppFileName)
+        public List<MppTask> GetMppTasks(string mppFileName, List<string> statusFilter, List<string> responsibleFilter)
         {
-            var tasks = _mppService.GetTasks(mppFileName);
+            var tasks = _mppService.GetTasks(mppFileName).AsQueryable();
+
+            if (statusFilter.Count > 0)
+            {
+                tasks = tasks.Where(t => statusFilter.Contains(t.Status));
+            }
+
+            if (responsibleFilter.Count > 0)
+            {
+                tasks = tasks.Where(t => responsibleFilter.Contains(t.Responsible));
+            }
 
             var treeObjects = tasks.Select(t => new MppTask(t.Id, t.Name, t.IndentLevel, t.Responsible)).ToList();
             SetupTree(treeObjects);

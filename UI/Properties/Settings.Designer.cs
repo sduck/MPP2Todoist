@@ -58,5 +58,27 @@ namespace MPP2Todoist.UI.Properties {
                 this["TodoistPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection MppStatusFilter {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MppStatusFilter"]));
+            }
+            set {
+                this["MppStatusFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection MppResponsibleFilter {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MppResponsibleFilter"]));
+            }
+            set {
+                this["MppResponsibleFilter"] = value;
+            }
+        }
     }
 }
