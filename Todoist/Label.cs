@@ -7,10 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
-{
-    using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 
+namespace MPP2Todoist.Todoist
+{
     /// <summary>
     /// Valid colors for labels.
     /// </summary>

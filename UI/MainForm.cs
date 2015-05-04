@@ -5,8 +5,7 @@ using System.Net;
 using System.Windows.Forms;
 using MPP2Todoist.Core;
 using MPP2Todoist.Core.DataObjects;
-using MPP2Todoist.MPP;
-using Todoist.NET;
+using MPP2Todoist.Todoist;
 
 namespace MPP2Todoist.UI
 {
@@ -23,66 +22,20 @@ namespace MPP2Todoist.UI
 
         private void btnLoadMpp_Click(object sender, EventArgs e)
         {
-            var tasks = SyncService.Instance.GetMppTasks(txtMppFile.Text);
+            var statusValues = SyncService.Instance.GetMppStatusList(txtMppFile.Text);
+            var responsibles = SyncService.Instance.GetMppResponsibleList(txtMppFile.Text);
 
-            txtCount.Text = tasks.Count.ToString();
-
-            FillTreeView(treeMppTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
-            treeMppTasks.Enabled = true;
-            treeMppTasks.ExpandAll();
-        }
-
-        private void RenderTree(List<TaskContainer> tasks)
-        {
-            treeMppTasks.Nodes.Clear();
-
-            int parentLevel = 0;
-            TreeNode currentParent = null;
-            foreach (var task in tasks)
+            foreach (var statusValue in statusValues)
             {
-                var node = new TreeNode(task.Name);
-                if (task.IndentLevel > parentLevel)
-                {
-                    // Create subnode
-                    if (currentParent == null)
-                    {
-                        // First node
-                        treeMppTasks.Nodes.Add(node);
-                    }
-                    else
-                    {
-                        currentParent.Nodes.Add(node);
-                    }
-
-                    currentParent = node;
-                    parentLevel = task.IndentLevel;
-                }
-                else if (task.IndentLevel < parentLevel)
-                {
-                    // Outdent task
-                    if (currentParent.Parent.Parent == null)
-                    {
-                        treeMppTasks.Nodes.Add(node);
-                    }
-                    else
-                    {
-                        currentParent.Parent.Parent.Nodes.Add(node);
-                    }
-
-                    currentParent = node;
-                    parentLevel = task.IndentLevel;
-                }
-                else
-                {
-                    currentParent.Parent.Nodes.Add(node);
-                }
+                lstStatusFilter.Items.Add(statusValue);
             }
 
-            treeMppTasks.ExpandAll();
-        }
+            foreach (var responsible in responsibles)
+            {
+                lstResponsibleFilter.Items.Add(responsible);
+            }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+            btnLoadMppTasks.Enabled = true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -153,6 +106,17 @@ namespace MPP2Todoist.UI
                     FillTreeView(newNode.Nodes, objectToAdd.Children);
                 }
             }
+        }
+
+        private void btnLoadMppTasks_Click(object sender, EventArgs e)
+        {
+            var tasks = SyncService.Instance.GetMppTasks(txtMppFile.Text);
+
+            txtCount.Text = tasks.Count.ToString();
+
+            FillTreeView(treeMppTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
+            treeMppTasks.Enabled = true;
+            treeMppTasks.ExpandAll();
         }
     }
 }

@@ -14,7 +14,6 @@ using System.Net;
 using System.Text;
 using System.Web;
 using Newtonsoft.Json.Linq;
-using Todoist.NET;
 
 namespace MPP2Todoist.Todoist
 {

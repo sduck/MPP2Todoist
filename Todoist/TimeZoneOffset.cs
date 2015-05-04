@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
+namespace MPP2Todoist.Todoist
 {
     /// <summary>
     /// The time zone offset.

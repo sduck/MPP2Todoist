@@ -8,7 +8,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Newtonsoft.Json.Linq;
-using Todoist.NET;
 
 namespace MPP2Todoist.Todoist
 {

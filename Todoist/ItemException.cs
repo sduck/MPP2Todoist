@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
-{
-    using System;
-    using System.Runtime.Serialization;
+using System;
+using System.Runtime.Serialization;
 
+namespace MPP2Todoist.Todoist
+{
     /// <summary>
     /// A general exception for all item errors.
     /// </summary>

@@ -27,8 +27,9 @@ namespace MPP2Todoist.MPP
                     {
                         Id = task.ID,
                         IndentLevel = task.OutlineLevel,
-                        Ansvarlig = task.ResourceNames,
-                        Name = task.Name
+                        Responsible = task.ResourceNames,
+                        Name = task.Name,
+                        Status = task.Text1
                     });
                 }
 
@@ -43,7 +44,6 @@ namespace MPP2Todoist.MPP
             {
                 app.FileCloseEx();
                 app.Quit();
-                app = null;
                 GC.Collect();
             }
         }
@@ -56,6 +56,26 @@ namespace MPP2Todoist.MPP
             }
 
             return _tasks;
+        }
+
+        public List<string> GetMppStatusList(string mppFile)
+        {
+            if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
+            {
+                LoadTasks(mppFile);
+            }
+
+            return _tasks.GroupBy(t => t.Status).Select(g => g.Key).OrderBy(i => i).ToList();
+        }
+
+        public List<string> GetMppResponsibleList(string mppFile)
+        {
+            if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
+            {
+                LoadTasks(mppFile);
+            }
+
+            return _tasks.GroupBy(t => t.Responsible).Select(g => g.Key).OrderBy(i => i).ToList();
         } 
     }
 }

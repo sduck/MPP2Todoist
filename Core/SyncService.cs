@@ -29,7 +29,7 @@ namespace MPP2Todoist.Core
         {
             var tasks = _mppService.GetTasks(mppFileName);
 
-            var treeObjects = tasks.Select(t => new MppTask(t.Id, t.Name, t.IndentLevel, t.Ansvarlig)).ToList();
+            var treeObjects = tasks.Select(t => new MppTask(t.Id, t.Name, t.IndentLevel, t.Responsible)).ToList();
             SetupTree(treeObjects);
 
             return treeObjects;
@@ -38,6 +38,16 @@ namespace MPP2Todoist.Core
         public void ReloadMppTasks(string mppFileName)
         {
             _mppService.LoadTasks(mppFileName);
+        }
+
+        public List<string> GetMppStatusList(string mppFileName)
+        {
+            return _mppService.GetMppStatusList(mppFileName);
+        }
+
+        public List<string> GetMppResponsibleList(string mppFileName)
+        {
+            return _mppService.GetMppResponsibleList(mppFileName);
         }
 
         #endregion

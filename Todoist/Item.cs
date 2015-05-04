@@ -7,12 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
+using System;
+using Newtonsoft.Json.Linq;
+
+namespace MPP2Todoist.Todoist
 {
-    using System;
-
-    using Newtonsoft.Json.Linq;
-
     /// <summary>
     /// Todoist.com task (or "item" as it is referred to in the API).
     /// </summary>

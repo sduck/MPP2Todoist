@@ -7,12 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
-{
-    using System;
-    using System.IO;
-    using System.Net;
+using System;
+using System.IO;
+using System.Net;
 
+namespace MPP2Todoist.Todoist
+{
     /// <summary>
     /// Static methods.
     /// </summary>

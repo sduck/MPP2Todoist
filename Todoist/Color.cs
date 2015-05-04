@@ -7,14 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Todoist.NET
-{
-    using System;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text.RegularExpressions;
+using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 
+namespace MPP2Todoist.Todoist
+{
     /// <summary>
     /// Enum of the valid colors Todoist.com allows.
     /// </summary>

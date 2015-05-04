@@ -35,6 +35,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.treeMppTasks = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLoadMppTasks = new System.Windows.Forms.Button();
+            this.lstStatusFilter = new System.Windows.Forms.CheckedListBox();
+            this.lstResponsibleFilter = new System.Windows.Forms.CheckedListBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLoadTodoistTasks = new System.Windows.Forms.Button();
             this.ddTodoistProjects = new System.Windows.Forms.ComboBox();
@@ -69,23 +74,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMppFile.Location = new System.Drawing.Point(61, 22);
             this.txtMppFile.Name = "txtMppFile";
-            this.txtMppFile.Size = new System.Drawing.Size(335, 20);
+            this.txtMppFile.Size = new System.Drawing.Size(254, 20);
             this.txtMppFile.TabIndex = 1;
             // 
             // btnLoadMpp
             // 
             this.btnLoadMpp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadMpp.Location = new System.Drawing.Point(321, 48);
+            this.btnLoadMpp.Location = new System.Drawing.Point(321, 20);
             this.btnLoadMpp.Name = "btnLoadMpp";
             this.btnLoadMpp.Size = new System.Drawing.Size(75, 23);
             this.btnLoadMpp.TabIndex = 2;
-            this.btnLoadMpp.Text = "Load tasks";
+            this.btnLoadMpp.Text = "Open";
             this.btnLoadMpp.UseVisualStyleBackColor = true;
             this.btnLoadMpp.Click += new System.EventHandler(this.btnLoadMpp_Click);
             // 
             // txtCount
             // 
-            this.txtCount.Location = new System.Drawing.Point(76, 50);
+            this.txtCount.Location = new System.Drawing.Point(76, 118);
             this.txtCount.Name = "txtCount";
             this.txtCount.ReadOnly = true;
             this.txtCount.Size = new System.Drawing.Size(84, 20);
@@ -94,7 +99,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 53);
+            this.label2.Location = new System.Drawing.Point(6, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 0;
@@ -106,9 +111,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeMppTasks.Enabled = false;
-            this.treeMppTasks.Location = new System.Drawing.Point(6, 77);
+            this.treeMppTasks.Location = new System.Drawing.Point(6, 147);
             this.treeMppTasks.Name = "treeMppTasks";
-            this.treeMppTasks.Size = new System.Drawing.Size(390, 408);
+            this.treeMppTasks.Size = new System.Drawing.Size(390, 338);
             this.treeMppTasks.TabIndex = 5;
             // 
             // groupBox1
@@ -116,11 +121,16 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnLoadMppTasks);
+            this.groupBox1.Controls.Add(this.lstStatusFilter);
+            this.groupBox1.Controls.Add(this.lstResponsibleFilter);
             this.groupBox1.Controls.Add(this.treeMppTasks);
             this.groupBox1.Controls.Add(this.btnLoadMpp);
             this.groupBox1.Controls.Add(this.txtCount);
             this.groupBox1.Controls.Add(this.txtMppFile);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -128,6 +138,51 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MPP";
+            // 
+            // btnLoadMppTasks
+            // 
+            this.btnLoadMppTasks.Enabled = false;
+            this.btnLoadMppTasks.Location = new System.Drawing.Point(321, 118);
+            this.btnLoadMppTasks.Name = "btnLoadMppTasks";
+            this.btnLoadMppTasks.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadMppTasks.TabIndex = 7;
+            this.btnLoadMppTasks.Text = "Load tasks";
+            this.btnLoadMppTasks.UseVisualStyleBackColor = true;
+            this.btnLoadMppTasks.Click += new System.EventHandler(this.btnLoadMppTasks_Click);
+            // 
+            // lstStatusFilter
+            // 
+            this.lstStatusFilter.FormattingEnabled = true;
+            this.lstStatusFilter.Location = new System.Drawing.Point(61, 48);
+            this.lstStatusFilter.Name = "lstStatusFilter";
+            this.lstStatusFilter.Size = new System.Drawing.Size(99, 64);
+            this.lstStatusFilter.TabIndex = 6;
+            // 
+            // lstResponsibleFilter
+            // 
+            this.lstResponsibleFilter.FormattingEnabled = true;
+            this.lstResponsibleFilter.Location = new System.Drawing.Point(240, 48);
+            this.lstResponsibleFilter.Name = "lstResponsibleFilter";
+            this.lstResponsibleFilter.Size = new System.Drawing.Size(156, 64);
+            this.lstResponsibleFilter.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(166, 51);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Responsible:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 51);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Status:";
             // 
             // groupBox2
             // 
@@ -263,7 +318,6 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -296,6 +350,11 @@
         private System.Windows.Forms.Button btnLoadTodoistTasks;
         private System.Windows.Forms.ComboBox ddTodoistProjects;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnLoadMppTasks;
+        private System.Windows.Forms.CheckedListBox lstStatusFilter;
+        private System.Windows.Forms.CheckedListBox lstResponsibleFilter;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }
 
