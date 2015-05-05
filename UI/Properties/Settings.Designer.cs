@@ -80,5 +80,17 @@ namespace MPP2Todoist.UI.Properties {
                 this["MppResponsibleFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TodoistProjectId {
+            get {
+                return ((int)(this["TodoistProjectId"]));
+            }
+            set {
+                this["TodoistProjectId"] = value;
+            }
+        }
     }
 }

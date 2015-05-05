@@ -103,9 +103,25 @@ namespace MPP2Todoist.UI
             {
                 ddTodoistProjects.Items.Add(project);
             }
+            var savedProjectFilter = Properties.Settings.Default.TodoistProjectId;
+            if (savedProjectFilter > 0)
+            {
+                foreach (var item in ddTodoistProjects.Items)
+                {
+                    var tmp = item as TodoistProject;
+                    if (null != tmp && tmp.Id == savedProjectFilter)
+                    {
+                        ddTodoistProjects.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                ddTodoistProjects.SelectedIndex = 0;
+            }
 
             ddTodoistProjects.Enabled = true;
-            ddTodoistProjects.SelectedIndex = 0;
             btnLoadTodoistTasks.Enabled = true;
         }
 
@@ -122,9 +138,9 @@ namespace MPP2Todoist.UI
                 treeTodoistTasks.Enabled = true;
                 treeTodoistTasks.ExpandAll();
 
+                Properties.Settings.Default.TodoistProjectId = selectedProject.Id;
             }
         }
-
 
         #endregion
 
