@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SyncForm));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnDoSync = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,16 +71,22 @@
             // 
             // treeTasksToSync
             // 
+            this.treeTasksToSync.ImageIndex = 0;
+            this.treeTasksToSync.ImageList = this.imageList;
             this.treeTasksToSync.Location = new System.Drawing.Point(15, 38);
             this.treeTasksToSync.Name = "treeTasksToSync";
+            this.treeTasksToSync.SelectedImageIndex = 0;
             this.treeTasksToSync.Size = new System.Drawing.Size(358, 298);
             this.treeTasksToSync.TabIndex = 4;
             // 
             // imageList
             // 
-            this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "check_box.png");
+            this.imageList.Images.SetKeyName(1, "check_box_uncheck.png");
+            this.imageList.Images.SetKeyName(2, "add.png");
+            this.imageList.Images.SetKeyName(3, "bullet_white.png");
             // 
             // SyncForm
             // 

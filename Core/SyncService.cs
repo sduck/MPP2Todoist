@@ -12,7 +12,10 @@ namespace MPP2Todoist.Core
         private readonly MppService _mppService;
         private readonly User _todoistUser;
         private List<MppTask> _mppTasks;
-        private List<TodoistTask> _todoistTasks; 
+        private List<TodoistTask> _todoistTasks;
+        private List<string> _mppStatusFilter;
+        private List<string> _mppResponsibleFilter;
+ 
 
         private SyncService()
         {
@@ -43,27 +46,32 @@ namespace MPP2Todoist.Core
             }
         }
 
-        public List<MppTask> GetNewTasks()
+        public List<MppTask> GetMatchedTasks()
         {
-            return _mppTasks.Where(t => !t.TargetId.HasValue).ToList();
+            return _mppTasks;
         } 
 
         #endregion
 
         #region MPP related
 
-        public List<MppTask> FetchMppTasks(string mppFileName, List<string> statusFilter, List<string> responsibleFilter)
+        public void SetMppFilter(List<string> statusFilter, List<string> responsibleFilter)
         {
-            var tasks = _mppService.GetTasks(mppFileName).AsQueryable();
+            _mppStatusFilter = statusFilter;
+            _mppResponsibleFilter = responsibleFilter;
+        }
+        public List<MppTask> GetFilteredMppTasks()
+        {
+            var tasks = _mppService.GetTasks().AsQueryable();
 
-            if (statusFilter.Count > 0)
+            if (null != _mppStatusFilter && _mppStatusFilter.Count > 0)
             {
-                tasks = tasks.Where(t => statusFilter.Contains(t.Status));
+                tasks = tasks.Where(t => _mppStatusFilter.Contains(t.Status));
             }
 
-            if (responsibleFilter.Count > 0)
+            if (null != _mppResponsibleFilter &&  _mppResponsibleFilter.Count > 0)
             {
-                tasks = tasks.Where(t => responsibleFilter.Contains(t.Responsible));
+                tasks = tasks.Where(t => _mppResponsibleFilter.Contains(t.Responsible));
             }
 
             var treeObjects = tasks.Select(t => new MppTask(t.Id, t.Name, t.IndentLevel, t.Responsible)).ToList();

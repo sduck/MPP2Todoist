@@ -8,12 +8,11 @@ namespace MPP2Todoist.MPP
     public class MppService
     {
         private List<TaskContainer> _tasks;
-        private string _mppFileLoaded;
+        private string _mppLoadedFile;
 
         public void LoadTasks(string mppFile)
         {
             var tasks = new List<TaskContainer>();
-
             var app = new Application();
             try
             {
@@ -27,7 +26,7 @@ namespace MPP2Todoist.MPP
                 }));
 
                 _tasks = tasks;
-                _mppFileLoaded = mppFile;
+                _mppLoadedFile = mppFile;
             }
             catch (System.Exception ex)
             {
@@ -41,11 +40,11 @@ namespace MPP2Todoist.MPP
             }
         }
 
-        public List<TaskContainer> GetTasks(string mppFile)
+        public List<TaskContainer> GetTasks()
         {
-            if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
+            if (String.IsNullOrEmpty(_mppLoadedFile))
             {
-                LoadTasks(mppFile);
+                throw new MppServiceException("No MPP file loaded");
             }
 
             return _tasks;
@@ -53,17 +52,17 @@ namespace MPP2Todoist.MPP
 
         public List<string> GetMppStatusList(string mppFile)
         {
-            if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
+            if (String.IsNullOrEmpty(_mppLoadedFile) || _tasks.Count == 0 || _mppLoadedFile != mppFile)
             {
                 LoadTasks(mppFile);
             }
 
-            return _tasks.GroupBy(t => t.Status).Select(g => g.Key).OrderBy(i => i).ToList();
+             return _tasks.GroupBy(t => t.Status).Select(g => g.Key).OrderBy(i => i).ToList();
         }
 
         public List<string> GetMppResponsibleList(string mppFile)
         {
-            if (String.IsNullOrEmpty(_mppFileLoaded) || _tasks.Count == 0 || _mppFileLoaded != mppFile)
+            if (String.IsNullOrEmpty(_mppLoadedFile) || _tasks.Count == 0 || _mppLoadedFile != mppFile)
             {
                 LoadTasks(mppFile);
             }

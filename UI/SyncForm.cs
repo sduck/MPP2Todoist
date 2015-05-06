@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using MPP2Todoist.Core;
+using MPP2Todoist.Core.DataObjects;
 
 namespace MPP2Todoist.UI
 {
@@ -10,9 +13,27 @@ namespace MPP2Todoist.UI
         {
             InitializeComponent();
 
-            foreach (var task in SyncService.Instance.GetNewTasks())
+            treeTasksToSync.Nodes.Clear();
+            FillTreeView(treeTasksToSync.Nodes, SyncService.Instance.GetMatchedTasks().Where(t => t.Parent == null).ToList());
+
+            treeTasksToSync.ExpandAll();
+        }
+
+        private void FillTreeView(TreeNodeCollection node, List<MppTask> objectsToAdd)
+        {
+            foreach (var objectToAdd in objectsToAdd)
             {
-                lstTasksToSync.Items.Add(task.FullName);
+                var image = objectToAdd.TargetId.HasValue ? 1 : 0;
+                var newNode = new TreeNode(String.Format("{0}", objectToAdd), image, image)
+                {
+                    Tag = objectToAdd
+                };
+                node.Add(newNode);
+
+                if (objectToAdd.Children.Count > 0)
+                {
+                    FillTreeView(newNode.Nodes, objectToAdd.Children);
+                }
             }
         }
 

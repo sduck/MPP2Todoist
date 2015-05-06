@@ -48,6 +48,7 @@ namespace MPP2Todoist.UI
         {
             var statusValues = SyncService.Instance.GetMppStatusList(txtMppFile.Text);
             var responsibles = SyncService.Instance.GetMppResponsibleList(txtMppFile.Text);
+
             var savedStatusFilter = Properties.Settings.Default.MppStatusFilter ?? new StringCollection();
             var savedResponsibleFilter = Properties.Settings.Default.MppResponsibleFilter ?? new StringCollection();
 
@@ -71,7 +72,8 @@ namespace MPP2Todoist.UI
         {
             var statusFilter = lstStatusFilter.CheckedItems.OfType<string>().ToList();
             var responsibleFilter = lstResponsibleFilter.CheckedItems.OfType<string>().ToList();
-            var tasks = SyncService.Instance.FetchMppTasks(txtMppFile.Text, statusFilter, responsibleFilter);
+            SyncService.Instance.SetMppFilter(statusFilter, responsibleFilter);
+            var tasks = SyncService.Instance.GetFilteredMppTasks();
 
             var statusStore = new StringCollection();
             statusStore.AddRange(statusFilter.ToArray());
