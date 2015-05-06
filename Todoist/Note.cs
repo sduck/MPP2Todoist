@@ -19,22 +19,22 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// Note content.
         /// </summary>
-        private readonly string content;
+        private readonly string _content;
 
         /// <summary>
         /// Unique note id.
         /// </summary>
-        private readonly int id;
+        private readonly int _id;
 
         /// <summary>
         /// Id of the item the note belongs to.
         /// </summary>
-        private readonly int itemId;
+        private readonly int _itemId;
 
         /// <summary>
         /// The JSON data for the note.
         /// </summary>
-        private readonly string jsonData;
+        private readonly string _jsonData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Note"/> class.
@@ -46,11 +46,10 @@ namespace MPP2Todoist.Todoist
         {
             JArray o = JArray.Parse(jsonData);
 
-            this.id = (int)o.SelectToken("id");
-            this.itemId = (int)o.SelectToken("item_id");
-            this.content = (string)o.SelectToken("content");
-
-            this.jsonData = jsonData;
+            _id = (int)o.SelectToken("id");
+            _itemId = (int)o.SelectToken("item_id");
+            _content = (string)o.SelectToken("content");
+            _jsonData = jsonData;
         }
 
         /// <summary>
@@ -58,7 +57,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public int Id
         {
-            get { return this.id; }
+            get { return _id; }
         }
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public int ItemId
         {
-            get { return this.itemId; }
+            get { return _itemId; }
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string Content
         {
-            get { return this.content; }
+            get { return _content; }
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string JsonData
         {
-            get { return this.jsonData; }
+            get { return _jsonData; }
         }
     }
 }

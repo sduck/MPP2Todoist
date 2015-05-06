@@ -67,17 +67,17 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// The color id.
         /// </summary>
-        private readonly LabelColor color;
+        private readonly LabelColor _color;
 
         /// <summary>
         /// The name.
         /// </summary>
-        private readonly string name;
+        private readonly string _name;
 
         /// <summary>
         /// The JSON data for this label.
         /// </summary>
-        private readonly string jsonData;
+        private readonly string _jsonData;
 
         #endregion
 
@@ -90,9 +90,9 @@ namespace MPP2Todoist.Todoist
         internal Label(string jsonData)
         {
             var o = JObject.Parse(jsonData);
-            this.name = (string)o.SelectToken("name");
-            this.color = (LabelColor)(int)o.SelectToken("color");
-            this.jsonData = jsonData;
+            _name = (string)o.SelectToken("name");
+            _color = (LabelColor)(int)o.SelectToken("color");
+            _jsonData = jsonData;
         }
 
         #region Public Properties
@@ -104,7 +104,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.color;
+                return _color;
             }
         }
 
@@ -115,7 +115,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.name;
+                return _name;
             }
         }
 
@@ -126,7 +126,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.jsonData;
+                return _jsonData;
             }
         }
 

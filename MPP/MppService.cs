@@ -21,17 +21,10 @@ namespace MPP2Todoist.MPP
 
                 var project = app.ActiveProject;
 
-                foreach (Task task in project.Tasks.Cast<Task>().ToList())
+                tasks.AddRange(project.Tasks.Cast<Task>().ToList().Select(task => new TaskContainer
                 {
-                    tasks.Add(new TaskContainer
-                    {
-                        Id = task.ID,
-                        IndentLevel = task.OutlineLevel,
-                        Responsible = task.ResourceNames,
-                        Name = task.Name,
-                        Status = task.Text1
-                    });
-                }
+                    Id = task.ID, IndentLevel = task.OutlineLevel, Responsible = task.ResourceNames, Name = task.Name, Status = task.Text1
+                }));
 
                 _tasks = tasks;
                 _mppFileLoaded = mppFile;

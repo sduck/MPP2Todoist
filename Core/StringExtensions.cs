@@ -5,13 +5,13 @@ namespace MPP2Todoist.Core
 {
     public static class StringExtensions
     {
-        static byte[] entropy = System.Text.Encoding.Unicode.GetBytes("Salt Is Not A Password");
+        static readonly byte[] _entropy = System.Text.Encoding.Unicode.GetBytes("Salt Is Not A Password");
 
-        public static string EncryptString(this System.Security.SecureString input)
+        public static string EncryptString(this SecureString input)
         {
             byte[] encryptedData = System.Security.Cryptography.ProtectedData.Protect(
                 System.Text.Encoding.Unicode.GetBytes(ToInsecureString(input)),
-                entropy,
+                _entropy,
                 System.Security.Cryptography.DataProtectionScope.CurrentUser);
             return Convert.ToBase64String(encryptedData);
         }
@@ -22,7 +22,7 @@ namespace MPP2Todoist.Core
             {
                 byte[] decryptedData = System.Security.Cryptography.ProtectedData.Unprotect(
                     Convert.FromBase64String(encryptedData),
-                    entropy,
+                    _entropy,
                     System.Security.Cryptography.DataProtectionScope.CurrentUser);
                 return ToSecureString(System.Text.Encoding.Unicode.GetString(decryptedData));
             }
@@ -45,7 +45,7 @@ namespace MPP2Todoist.Core
 
         public static string ToInsecureString(this SecureString input)
         {
-            string returnValue = string.Empty;
+            string returnValue;
             IntPtr ptr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(input);
             try
             {

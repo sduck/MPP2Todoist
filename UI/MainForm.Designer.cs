@@ -51,6 +51,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnSync = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -74,13 +75,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMppFile.Location = new System.Drawing.Point(61, 22);
             this.txtMppFile.Name = "txtMppFile";
-            this.txtMppFile.Size = new System.Drawing.Size(335, 20);
+            this.txtMppFile.Size = new System.Drawing.Size(334, 20);
             this.txtMppFile.TabIndex = 1;
             // 
             // btnLoadMpp
             // 
             this.btnLoadMpp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadMpp.Location = new System.Drawing.Point(402, 20);
+            this.btnLoadMpp.Location = new System.Drawing.Point(401, 20);
             this.btnLoadMpp.Name = "btnLoadMpp";
             this.btnLoadMpp.Size = new System.Drawing.Size(75, 23);
             this.btnLoadMpp.TabIndex = 2;
@@ -113,7 +114,7 @@
             this.treeMppTasks.Enabled = false;
             this.treeMppTasks.Location = new System.Drawing.Point(6, 167);
             this.treeMppTasks.Name = "treeMppTasks";
-            this.treeMppTasks.Size = new System.Drawing.Size(471, 458);
+            this.treeMppTasks.Size = new System.Drawing.Size(470, 421);
             this.treeMppTasks.TabIndex = 5;
             // 
             // groupBox1
@@ -134,7 +135,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(483, 631);
+            this.groupBox1.Size = new System.Drawing.Size(482, 594);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "MPP";
@@ -143,7 +144,7 @@
             // 
             this.btnLoadMppTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoadMppTasks.Enabled = false;
-            this.btnLoadMppTasks.Location = new System.Drawing.Point(402, 138);
+            this.btnLoadMppTasks.Location = new System.Drawing.Point(401, 138);
             this.btnLoadMppTasks.Name = "btnLoadMppTasks";
             this.btnLoadMppTasks.Size = new System.Drawing.Size(75, 23);
             this.btnLoadMppTasks.TabIndex = 7;
@@ -167,7 +168,7 @@
             this.lstResponsibleFilter.Location = new System.Drawing.Point(261, 48);
             this.lstResponsibleFilter.Name = "lstResponsibleFilter";
             this.lstResponsibleFilter.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lstResponsibleFilter.Size = new System.Drawing.Size(216, 79);
+            this.lstResponsibleFilter.Size = new System.Drawing.Size(215, 79);
             this.lstResponsibleFilter.TabIndex = 6;
             // 
             // label7
@@ -204,7 +205,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(500, 631);
+            this.groupBox2.Size = new System.Drawing.Size(501, 594);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Todoist";
@@ -238,7 +239,7 @@
             this.treeTodoistTasks.Enabled = false;
             this.treeTodoistTasks.Location = new System.Drawing.Point(6, 106);
             this.treeTodoistTasks.Name = "treeTodoistTasks";
-            this.treeTodoistTasks.Size = new System.Drawing.Size(488, 519);
+            this.treeTodoistTasks.Size = new System.Drawing.Size(489, 482);
             this.treeTodoistTasks.TabIndex = 3;
             // 
             // btnTodoistLogin
@@ -309,19 +310,31 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(999, 637);
-            this.splitContainer1.SplitterDistance = 489;
+            this.splitContainer1.Size = new System.Drawing.Size(999, 600);
+            this.splitContainer1.SplitterDistance = 488;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnSync
+            // 
+            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSync.Enabled = false;
+            this.btnSync.Location = new System.Drawing.Point(927, 626);
+            this.btnSync.Name = "btnSync";
+            this.btnSync.Size = new System.Drawing.Size(75, 23);
+            this.btnSync.TabIndex = 1;
+            this.btnSync.Text = "Sync";
+            this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 661);
+            this.Controls.Add(this.btnSync);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "MPP2Todoist";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -359,6 +372,7 @@
         private System.Windows.Forms.CheckedListBox lstResponsibleFilter;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSync;
     }
 }
 

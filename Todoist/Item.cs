@@ -22,67 +22,67 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// Task text.
         /// </summary>
-        private readonly string content;
+        private readonly string _content;
 
         /// <summary>
         /// The raw string of the due date.
         /// </summary>
-        private readonly string dateString;
+        private readonly string _dateString;
 
         /// <summary>
         /// The next due date.
         /// </summary>
-        private readonly string dueDate;
+        private readonly string _dueDate;
 
         /// <summary>
         /// Task's unique id.
         /// </summary>
-        private readonly int id;
+        private readonly int _id;
 
         /// <summary>
         /// Task's indent level.
         /// </summary>
-        private readonly int indent;
+        private readonly int _indent;
 
         /// <summary>
         /// True if the task has been 'checked' on the website, which usually means it has been completed.
         /// </summary>
-        private readonly bool isChecked;
+        private readonly bool _isChecked;
 
         /// <summary>
         /// True if the task has been put in the history, which usually means it has been completed.
         /// </summary>
-        private readonly bool isInHistory;
+        private readonly bool _isInHistory;
 
         /// <summary>
         /// Are the subtasks collapsed.
         /// </summary>
-        private readonly bool isSubTasksCollapsed;
+        private readonly bool _isSubTasksCollapsed;
 
         /// <summary>
         /// Task's weight in the order of tasks.
         /// </summary>
-        private readonly int itemOrder;
+        private readonly int _itemOrder;
 
         /// <summary>
         /// The JSON data of the task.
         /// </summary>
-        private readonly string jsonData;
+        private readonly string _jsonData;
 
         /// <summary>
         /// The id of the user who owns the task.
         /// </summary>
-        private readonly int ownerId;
+        private readonly int _ownerId;
 
         /// <summary>
         /// The priority of the task.
         /// </summary>
-        private readonly int priority;
+        private readonly int _priority;
 
         /// <summary>
         /// The id of the project the task belongs to.
         /// </summary>
-        private readonly int projectId;
+        private readonly int _projectId;
 
         #endregion
 
@@ -106,19 +106,19 @@ namespace MPP2Todoist.Todoist
                 throw new ArgumentNullException(jsonData);
             }
 
-            this.id = (int)o.SelectToken("id");
-            this.ownerId = (int)o.SelectToken("user_id");
-            this.isSubTasksCollapsed = Convert.ToBoolean((int)o.SelectToken("collapsed"));
-            this.isInHistory = Convert.ToBoolean((int)o.SelectToken("in_history"));
-            this.priority = (int)o.SelectToken("priority");
-            this.itemOrder = (int)o.SelectToken("item_order");
-            this.content = (string)o.SelectToken("content");
-            this.indent = (int)o.SelectToken("indent");
-            this.projectId = (int)o.SelectToken("project_id");
-            this.isChecked = Convert.ToBoolean((int)o.SelectToken("checked"));
-            this.dateString = (string)o.SelectToken("date_string");
-            this.dueDate = (string)o.SelectToken("due_date");
-            this.jsonData = jsonData;
+            _id = (int)o.SelectToken("id");
+            _ownerId = (int)o.SelectToken("user_id");
+            _isSubTasksCollapsed = Convert.ToBoolean((int)o.SelectToken("collapsed"));
+            _isInHistory = Convert.ToBoolean((int)o.SelectToken("in_history"));
+            _priority = (int)o.SelectToken("priority");
+            _itemOrder = (int)o.SelectToken("item_order");
+            _content = (string)o.SelectToken("content");
+            _indent = (int)o.SelectToken("indent");
+            _projectId = (int)o.SelectToken("project_id");
+            _isChecked = Convert.ToBoolean((int)o.SelectToken("checked"));
+            _dateString = (string)o.SelectToken("date_string");
+            _dueDate = (string)o.SelectToken("due_date");
+            _jsonData = jsonData;
         }
 
         #endregion
@@ -132,7 +132,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.content;
+                return _content;
             }
         }
 
@@ -143,7 +143,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.dateString;
+                return _dateString;
             }
         }
 
@@ -154,7 +154,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.dueDate;
+                return _dueDate;
             }
         }
 
@@ -165,7 +165,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.id;
+                return _id;
             }
         }
 
@@ -176,7 +176,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.indent;
+                return _indent;
             }
         }
 
@@ -187,7 +187,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.isChecked;
+                return _isChecked;
             }
         }
 
@@ -198,7 +198,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.isInHistory;
+                return _isInHistory;
             }
         }
 
@@ -209,7 +209,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.isSubTasksCollapsed;
+                return _isSubTasksCollapsed;
             }
         }
 
@@ -220,7 +220,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.itemOrder;
+                return _itemOrder;
             }
         }
 
@@ -231,7 +231,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.jsonData;
+                return _jsonData;
             }
         }
 
@@ -242,7 +242,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.ownerId;
+                return _ownerId;
             }
         }
 
@@ -253,7 +253,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.priority;
+                return _priority;
             }
         }
 
@@ -264,7 +264,7 @@ namespace MPP2Todoist.Todoist
         {
             get
             {
-                return this.projectId;
+                return _projectId;
             }
         }
 

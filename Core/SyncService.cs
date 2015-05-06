@@ -11,6 +11,8 @@ namespace MPP2Todoist.Core
         private readonly static SyncService _instance = new SyncService();
         private readonly MppService _mppService;
         private readonly User _todoistUser;
+        private List<MppTask> _mppTasks;
+        private List<TodoistTask> _todoistTasks; 
 
         private SyncService()
         {
@@ -23,9 +25,34 @@ namespace MPP2Todoist.Core
             get { return _instance; }
         }
 
+        #region Sync stuff
+
+        public bool ReadyForSync
+        {
+            get
+            {
+                return (null != _mppTasks && _mppTasks.Count > 0) && (null != _todoistTasks && _todoistTasks.Count > 0);
+            }
+        }
+
+        public void MatchTasks()
+        {
+            foreach (var mppTask in _mppTasks)
+            {
+                mppTask.MatchAgaistTarget(_todoistTasks);
+            }
+        }
+
+        public List<MppTask> GetNewTasks()
+        {
+            return _mppTasks.Where(t => !t.TargetId.HasValue).ToList();
+        } 
+
+        #endregion
+
         #region MPP related
 
-        public List<MppTask> GetMppTasks(string mppFileName, List<string> statusFilter, List<string> responsibleFilter)
+        public List<MppTask> FetchMppTasks(string mppFileName, List<string> statusFilter, List<string> responsibleFilter)
         {
             var tasks = _mppService.GetTasks(mppFileName).AsQueryable();
 
@@ -42,7 +69,8 @@ namespace MPP2Todoist.Core
             var treeObjects = tasks.Select(t => new MppTask(t.Id, t.Name, t.IndentLevel, t.Responsible)).ToList();
             SetupTree(treeObjects);
 
-            return treeObjects;
+            _mppTasks = treeObjects;
+            return _mppTasks;
         }
 
         public void ReloadMppTasks(string mppFileName)
@@ -86,7 +114,8 @@ namespace MPP2Todoist.Core
             var treeObjects = tasks.Select(task => new TodoistTask(task.Id, task.Content, task.Indent)).ToList();
             SetupTree(treeObjects);
 
-            return treeObjects;
+            _todoistTasks = treeObjects;
+            return _todoistTasks;
         }
 
         #endregion

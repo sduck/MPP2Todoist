@@ -21,11 +21,26 @@ namespace MPP2Todoist.UI
             txtPassword.Text = Properties.Settings.Default.TodoistPassword.DecryptString().ToInsecureString();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        #region Sync stuff
+
+        private void EnableSync()
         {
-            Properties.Settings.Default.MppFile = txtMppFile.Text;
-            Properties.Settings.Default.Save();
+            btnSync.Enabled = SyncService.Instance.ReadyForSync;
         }
+
+
+        private void btnSync_Click(object sender, EventArgs e)
+        {
+            if (SyncService.Instance.ReadyForSync)
+            {
+                SyncService.Instance.MatchTasks();
+
+                var syncForm = new SyncForm();
+                syncForm.ShowDialog();
+            }
+        }
+
+        #endregion
 
         #region MPP related
 
@@ -47,13 +62,16 @@ namespace MPP2Todoist.UI
             }
 
             btnLoadMppTasks.Enabled = true;
+
+            Properties.Settings.Default.MppFile = txtMppFile.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void btnLoadMppTasks_Click(object sender, EventArgs e)
         {
             var statusFilter = lstStatusFilter.CheckedItems.OfType<string>().ToList();
             var responsibleFilter = lstResponsibleFilter.CheckedItems.OfType<string>().ToList();
-            var tasks = SyncService.Instance.GetMppTasks(txtMppFile.Text, statusFilter, responsibleFilter);
+            var tasks = SyncService.Instance.FetchMppTasks(txtMppFile.Text, statusFilter, responsibleFilter);
 
             var statusStore = new StringCollection();
             statusStore.AddRange(statusFilter.ToArray());
@@ -69,6 +87,7 @@ namespace MPP2Todoist.UI
             FillTreeView(treeMppTasks.Nodes, tasks.Where(t => t.Parent == null).ToList());
             treeMppTasks.Enabled = true;
             treeMppTasks.ExpandAll();
+            EnableSync();
         }
 
         #endregion
@@ -139,6 +158,8 @@ namespace MPP2Todoist.UI
                 treeTodoistTasks.ExpandAll();
 
                 Properties.Settings.Default.TodoistProjectId = selectedProject.Id;
+                Properties.Settings.Default.Save();
+                EnableSync();
             }
         }
 
@@ -148,8 +169,10 @@ namespace MPP2Todoist.UI
         {
             foreach (var objectToAdd in objectsToAdd)
             {
-                var newNode = new TreeNode(String.Format("{0}", objectToAdd));
-                newNode.Tag = objectToAdd;
+                var newNode = new TreeNode(String.Format("{0}", objectToAdd))
+                {
+                    Tag = objectToAdd
+                };
                 node.Add(newNode);
 
                 if (objectToAdd.Children.Count > 0)

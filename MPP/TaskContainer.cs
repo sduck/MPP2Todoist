@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MPP2Todoist.MPP
+﻿namespace MPP2Todoist.MPP
 {
     public class TaskContainer
     {

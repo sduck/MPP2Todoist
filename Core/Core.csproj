@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataObjects\TaskSyncSource.cs" />
     <Compile Include="DataObjects\ITreeObject.cs" />
     <Compile Include="DataObjects\MppTask.cs" />
+    <Compile Include="DataObjects\TaskBase.cs" />
     <Compile Include="DataObjects\TodoistProject.cs" />
     <Compile Include="DataObjects\TodoistTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

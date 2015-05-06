@@ -90,17 +90,17 @@ namespace MPP2Todoist.Todoist
         /// <summary>
         /// Color in hex.
         /// </summary>
-        private readonly string htmlColor;
+        private readonly string _htmlColor;
 
         /// <summary>
         /// Color in <see cref="System.Drawing.Color"/>.
         /// </summary>
-        private readonly System.Drawing.Color rgb;
+        private readonly System.Drawing.Color _rgb;
 
         /// <summary>
         /// Color in <see cref="Color"/>.
         /// </summary>
-        private readonly TodoistColor todoistColor;
+        private readonly TodoistColor _todoistColor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Color"/> class.
@@ -110,17 +110,17 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public Color(TodoistColor todoistColor)
         {
-            this.todoistColor = todoistColor;
-            this.htmlColor = ConvertTodoistColorToString(TodoistColor);
-            this.rgb = ConvertStringToColor(this.htmlColor);
+            _todoistColor = todoistColor;
+            _htmlColor = ConvertTodoistColorToString(TodoistColor);
+            _rgb = ConvertStringToColor(_htmlColor);
         }
 
         /// <summary>
-        /// Gets <see cref="todoistColor"/>.
+        /// Gets <see cref="_todoistColor"/>.
         /// </summary>
         public TodoistColor TodoistColor
         {
-            get { return this.todoistColor; }
+            get { return _todoistColor; }
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public string HtmlColor
         {
-            get { return this.htmlColor; }
+            get { return _htmlColor; }
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MPP2Todoist.Todoist
         /// </summary>
         public System.Drawing.Color Rgb
         {
-            get { return this.rgb; }
+            get { return _rgb; }
         }
 
         /// <summary>

@@ -33,10 +33,10 @@ namespace MPP2Todoist.Todoist
         /// </param>
         public TimeZoneOffset(string gmtValue, int hourOffset, int minuteOffset, bool isDaylightSavingsTime)
         {
-            this.GmtString = gmtValue;
-            this.HourOffset = hourOffset;
-            this.MinuteOffset = minuteOffset;
-            this.IsDaylightSavingsTime = isDaylightSavingsTime;
+            GmtString = gmtValue;
+            HourOffset = hourOffset;
+            MinuteOffset = minuteOffset;
+            IsDaylightSavingsTime = isDaylightSavingsTime;
         }
 
         /// <summary>
