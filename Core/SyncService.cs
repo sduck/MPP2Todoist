@@ -40,9 +40,11 @@ namespace MPP2Todoist.Core
 
         public void MatchTasks()
         {
+            var lastItemOrder = 0;
             foreach (var mppTask in _mppTasks)
             {
-                mppTask.MatchAgaistTarget(_todoistTasks);
+                mppTask.MatchAgaistTarget(_todoistTasks, lastItemOrder);
+                lastItemOrder = mppTask.ItemOrder;
             }
         }
 
@@ -119,7 +121,7 @@ namespace MPP2Todoist.Core
         {
             var tasks = _todoistUser.GetUncompletedItemsByProjectId(projectId);
 
-            var treeObjects = tasks.Select(task => new TodoistTask(task.Id, task.Content, task.Indent)).ToList();
+            var treeObjects = tasks.Select(task => new TodoistTask(task.Id, task.Content, task.Indent, task.ItemOrder)).ToList();
             SetupTree(treeObjects);
 
             _todoistTasks = treeObjects;

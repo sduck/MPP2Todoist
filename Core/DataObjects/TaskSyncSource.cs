@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MPP2Todoist.Core.DataObjects
@@ -7,15 +8,21 @@ namespace MPP2Todoist.Core.DataObjects
         where TSource : TaskBase<TSource>
         where TTarget : TaskBase<TTarget>
     {
-        public int? TargetId { get; set; }
+        public TTarget Target { get; set; }
 
-        public void MatchAgaistTarget(List<TTarget> targetList)
+        public void MatchAgaistTarget(List<TTarget> targetList, int lastItemOrder)
         {
             var match = targetList.FirstOrDefault(t => t.FullName == FullName);
 
             if (null != match)
             {
-                TargetId = match.Id;
+                Target = match;
+                ItemOrder = Math.Max(++lastItemOrder, match.ItemOrder);
+            }
+            else
+            {
+                // Assign new item order
+                ItemOrder = ++lastItemOrder;
             }
         }
     }

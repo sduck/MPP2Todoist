@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MPP2Todoist.Core.DataObjects
 {
@@ -13,6 +14,11 @@ namespace MPP2Todoist.Core.DataObjects
             Indent = indent;
             Ansvarlig = ansvarlig;
             Children = new List<MppTask>();
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0} : {1}", base.ToString(), ItemOrder);
         }
     }
 }

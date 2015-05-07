@@ -23,11 +23,12 @@ namespace MPP2Todoist.UI
         {
             foreach (var objectToAdd in objectsToAdd)
             {
-                var image = objectToAdd.TargetId.HasValue ? 1 : 0;
+                var image = null != objectToAdd.Target ? 1 : 0;
                 var newNode = new TreeNode(String.Format("{0}", objectToAdd), image, image)
                 {
                     Tag = objectToAdd
                 };
+
                 node.Add(newNode);
 
                 if (objectToAdd.Children.Count > 0)

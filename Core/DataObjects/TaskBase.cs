@@ -8,6 +8,7 @@ namespace MPP2Todoist.Core.DataObjects
         public string Name { get; set; }
         public int Id { get; set; }
         public int Indent { get; set; }
+        public int ItemOrder { get; set; }
         public T Parent { get; set; }
         public List<T> Children { get; set; }
 
@@ -24,6 +25,7 @@ namespace MPP2Todoist.Core.DataObjects
                 return fullname;
             }
         }
+
 
         public override string ToString()
         {
