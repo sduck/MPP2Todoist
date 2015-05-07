@@ -37,6 +37,8 @@ namespace MPP2Todoist.UI
 
                 var syncForm = new SyncForm();
                 syncForm.ShowDialog();
+
+                LoadTodoistTasks();
             }
         }
 
@@ -147,6 +149,11 @@ namespace MPP2Todoist.UI
         }
 
         private void btnLoadTodoistTasks_Click(object sender, EventArgs e)
+        {
+            LoadTodoistTasks();
+        }
+
+        private void LoadTodoistTasks()
         {
             var selectedProject = ddTodoistProjects.SelectedItem as TodoistProject;
             if (null != selectedProject)

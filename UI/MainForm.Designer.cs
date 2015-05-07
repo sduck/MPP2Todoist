@@ -32,7 +32,6 @@
             this.txtMppFile = new System.Windows.Forms.TextBox();
             this.btnLoadMpp = new System.Windows.Forms.Button();
             this.txtCount = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.treeMppTasks = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLoadMppTasks = new System.Windows.Forms.Button();
@@ -52,6 +51,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnSync = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -96,15 +96,6 @@
             this.txtCount.ReadOnly = true;
             this.txtCount.Size = new System.Drawing.Size(105, 20);
             this.txtCount.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 141);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Task count:";
             // 
             // treeMppTasks
             // 
@@ -213,7 +204,7 @@
             // btnLoadTodoistTasks
             // 
             this.btnLoadTodoistTasks.Enabled = false;
-            this.btnLoadTodoistTasks.Location = new System.Drawing.Point(317, 77);
+            this.btnLoadTodoistTasks.Location = new System.Drawing.Point(301, 78);
             this.btnLoadTodoistTasks.Name = "btnLoadTodoistTasks";
             this.btnLoadTodoistTasks.Size = new System.Drawing.Size(92, 23);
             this.btnLoadTodoistTasks.TabIndex = 5;
@@ -270,7 +261,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 82);
+            this.label5.Location = new System.Drawing.Point(6, 83);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 0;
@@ -326,6 +317,15 @@
             this.btnSync.UseVisualStyleBackColor = true;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Task count:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,7 +353,6 @@
         private System.Windows.Forms.TextBox txtMppFile;
         private System.Windows.Forms.Button btnLoadMpp;
         private System.Windows.Forms.TextBox txtCount;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TreeView treeMppTasks;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -373,6 +372,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSync;
+        private System.Windows.Forms.Label label2;
     }
 }
 

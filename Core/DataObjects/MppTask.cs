@@ -15,10 +15,5 @@ namespace MPP2Todoist.Core.DataObjects
             Ansvarlig = ansvarlig;
             Children = new List<MppTask>();
         }
-
-        public override string ToString()
-        {
-            return String.Format("{0} : {1}", base.ToString(), ItemOrder);
-        }
     }
 }

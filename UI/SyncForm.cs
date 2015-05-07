@@ -45,7 +45,8 @@ namespace MPP2Todoist.UI
 
         private void btnDoSync_Click(object sender, EventArgs e)
         {
-
+            SyncService.Instance.PushToTodoist();
+            Close();
         }
     }
 }

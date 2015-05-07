@@ -25,5 +25,11 @@ namespace MPP2Todoist.Core.DataObjects
                 ItemOrder = ++lastItemOrder;
             }
         }
+
+        public void ClearMatch()
+        {
+            Target = null;
+            ItemOrder = 0;
+        }
     }
 }

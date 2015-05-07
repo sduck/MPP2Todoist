@@ -450,7 +450,7 @@ namespace MPP2Todoist.Todoist
         /// <param name="itemOrder">
         /// Item index on the list.
         /// </param>
-        public void AddItemToProject(int projectId, string content, int priority, int indent, int? itemOrder)
+        public Item AddItemToProject(int projectId, string content, int priority, int indent, int? itemOrder)
         {
             CheckLoginStatus();
 
@@ -470,7 +470,7 @@ namespace MPP2Todoist.Todoist
                     "token={0}&project_id={1}&content={2}&priority={3}&indent={4}&item_order={5}",
                     ApiToken,
                     projectId,
-                    content,
+                    HttpUtility.UrlEncode(content),
                     priority,
                     indent,
                     itemOrder),
@@ -486,6 +486,8 @@ namespace MPP2Todoist.Todoist
             {
                 throw new ItemException("Wrong date syntax.");
             }
+
+            return new Item(jsonResponse);
         }
 
         /// <summary>

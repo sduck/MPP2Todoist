@@ -15,7 +15,8 @@ namespace MPP2Todoist.Core
         private List<TodoistTask> _todoistTasks;
         private List<string> _mppStatusFilter;
         private List<string> _mppResponsibleFilter;
- 
+        private int _todoistProjectId;
+
 
         private SyncService()
         {
@@ -48,10 +49,38 @@ namespace MPP2Todoist.Core
             }
         }
 
+        public void ClearMatching()
+        {
+            if (null == _mppTasks)
+            {
+                return;
+            }
+
+            foreach (var mppTask in _mppTasks)
+            {
+                mppTask.ClearMatch();
+            }
+        }
+
         public List<MppTask> GetMatchedTasks()
         {
             return _mppTasks;
-        } 
+        }
+
+        public void PushToTodoist()
+        {
+            MatchTasks();
+
+            foreach (var taskToSync in _mppTasks.Where(t => t.Target == null))
+            {
+                var newTask = _todoistUser.AddItemToProject(_todoistProjectId, taskToSync.Name, 1, taskToSync.Indent, taskToSync.ItemOrder);
+                taskToSync.Target = new TodoistTask(newTask.Id, newTask.Content, newTask.Indent, newTask.ItemOrder);
+
+            }
+
+            var order = _mppTasks.Where(t => t.Target != null).OrderBy(t => t.ItemOrder).Select(t => t.Target.Id).ToArray();
+            _todoistUser.UpdateItemOrdering(_todoistProjectId, order);
+        }
 
         #endregion
 
@@ -71,7 +100,7 @@ namespace MPP2Todoist.Core
                 tasks = tasks.Where(t => _mppStatusFilter.Contains(t.Status));
             }
 
-            if (null != _mppResponsibleFilter &&  _mppResponsibleFilter.Count > 0)
+            if (null != _mppResponsibleFilter && _mppResponsibleFilter.Count > 0)
             {
                 tasks = tasks.Where(t => _mppResponsibleFilter.Contains(t.Responsible));
             }
@@ -120,11 +149,15 @@ namespace MPP2Todoist.Core
         public List<TodoistTask> GetTodoistTasks(int projectId)
         {
             var tasks = _todoistUser.GetUncompletedItemsByProjectId(projectId);
+            _todoistProjectId = projectId;
 
             var treeObjects = tasks.Select(task => new TodoistTask(task.Id, task.Content, task.Indent, task.ItemOrder)).ToList();
             SetupTree(treeObjects);
 
             _todoistTasks = treeObjects;
+
+            ClearMatching();
+
             return _todoistTasks;
         }
 
